@@ -3,7 +3,7 @@
 $cells = array();
 
 function getFile() {
-  $file = explode("\n", file_get_contents('./dmg-log/damagelog_2018-01-26.txt', true));
+  $file = explode("\n", file_get_contents('./dmg-log/damagelog_2018-10-08.txt', true));
   foreach($file as $key => $row){
       $cells[] = explode(", ",$row);
   }
@@ -12,13 +12,11 @@ function getFile() {
 
 // Return a table of Raw Data
 function getRaw() {
- $cells = getFile();
-$header = "";
-$tabledata= "";
+$cells = getFile();
 	if($cells != null){
 		$table = "<table id='myTable'>";
-			$table .="<tr>";
-			foreach($cells as $key => $row){		
+		$table .="<tr>";
+		foreach($cells as $key => $row){		
 			if($key == 0){
 				foreach($row as $k => $r){
 					$incident = explode(":",$r);
@@ -28,10 +26,7 @@ $tabledata= "";
 				}
 			}
 		}
-				$table .="</tr>";
-	
-	
-	
+		$table .="</tr>";
 		foreach($cells as $key => $row){		
 			$table .="<tr>";		
 			foreach($row as $k => $r){
@@ -42,16 +37,11 @@ $tabledata= "";
 			}
 			$table .="</tr>";
 		}
-	
 		$table .="</table>";
 	}
-
-
-  
-return $table;
-
 	
-
+	
+return $table;
 }
 
 // Return the name of the player with the top kills
@@ -63,7 +53,6 @@ function topKills() {
   $killerarray = array();
   $killer = array();
   if($cells != null){
-     $incident = array();
       foreach($cells as $key => $row){
         foreach($row as $k =>$r){
         	if($k == 13){
@@ -77,25 +66,26 @@ function topKills() {
 					$values = explode(':', $row[1]);
 					array_push($killer,str_replace('"','',$values[1]));					
 					$killerarray = array_count_values($killer);
-
-
-	           	} else {
+	           	}else{
 					continue;
 				}
+				
        		}
-       }
-  }
-  		$table = "<table id='myTable'>";
-		$table .="<tr>";
-		$table .="<th>Player Name</th><th>Kill Count</th>";
-		$table .="</tr>";
-		$table .="<tr>";
-		foreach($killerarray as $key => $row){
-			$table .= "<tr><td>$key</td><td>$row</td></tr>";
 		}
-		$table .="</tr>";
-		$table .="</table>";
-  }
+	}
+	$table = "<table id='myTable'>";
+	$table .="<tr>";
+	$table .="<th>Player Name</th><th>Kill Count</th>";
+	$table .="</tr>";
+	$table .="<tr>";
+	foreach($killerarray as $key => $row){
+		$table .= "<tr><td>$key</td><td>$row</td></tr>";
+	}
+	$table .="</tr>";
+	$table .="</table>";
+	}
+	
+	
   return $table;
 }
 
