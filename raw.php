@@ -1,4 +1,4 @@
-<?php include('./single.php'); ?>
+<?php include('./models/single.php'); ?>
 <?php include('./inc/header.php'); ?>
   <div style="overflow-x:auto;">
 <?php echo getRaw(); ?>

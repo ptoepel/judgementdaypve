@@ -28,6 +28,8 @@ $("#menu").on("click", function(){
   <span id="exit">&times;</span>
 	<ul>
 <li><a href="./raw.php" >Raw Data</a></li>
-<li><a href="./game_stats.php">Most Kills</a></li>
+<li><a href="./killsbyplayer.php">Most Kills</a></li>
 	</ul>
+	<iframe src="https://www.i3d.net/gameserver-widget/806741/d6fd920ec9c1fcc85a93918faee6b052070fea6a/1"></iframe>
+
 </div>
