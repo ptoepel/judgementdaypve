@@ -11,7 +11,7 @@ table {
 th, td {
    text-align: left;
    padding: 2px;
-   
+
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
@@ -20,7 +20,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 
 body{
-    background-image: url('../gaming-pattern/gaming-pattern.png');
+    background-image: url("./gaming-pattern/gaming-pattern.png");
 	background-repeat: repeat;
 	font-family: 'Rubik', sans-serif;
 }
@@ -32,13 +32,13 @@ body{
 	padding:12px 12px;
 }
 nav {
-	
+
 }
 header{}
 
 
 
-/* Navigation */ 
+/* Navigation */
 
 
 
@@ -100,7 +100,7 @@ li:hover{
     opacity: 0;
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
-    
+
 }
 
 #exit{
