@@ -29,7 +29,7 @@ $("#menu").on("click", function(){
 <div id="lgMenu">
   <span id="exit">&times;</span>
 	<ul>
-	<li><?php echo '<a href="'.$_SERVER['REQUEST_URI'].'home/index">Home</a>';?></li>
+	<li><a href="home/index">Home</a></li>
 	<li><a href="/blog/index" >Blog</a></li>
 	<li><a href="/report/rawdata" >Raw Data</a></li>
 	<li><a href="/report/killsbyplayer">Most Kills</a></li>
