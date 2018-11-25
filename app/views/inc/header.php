@@ -3,8 +3,8 @@
 <head>
 <title>Miscreated Damage Logs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../../css/styles.css">
-<link rel="stylesheet" type="text/css" href="../../css/theme.css">
+<link rel="stylesheet" type="text/css" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="./css/theme.css">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet"> <!-- Google Font Styling-->
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

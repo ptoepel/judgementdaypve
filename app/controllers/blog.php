@@ -16,6 +16,18 @@ class Blog extends Controller
 	}
 
 
+	public function posts($name= '')
+	{
+/*
+			if(!DB::query('SELECT * FROM cms_content')){
+        echo "win";
+      }
+*/
+
+
+		$this->view('blog/posts');
+	}
+
 
 
 }
