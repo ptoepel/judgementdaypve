@@ -3,11 +3,11 @@
 class Contact extends Controller{
 	public function index()
 	{
-		echo 'contact index';
+		$this->view('contact/index');
 	}
-	
+
 	public function phone()
 	{
-		 echo 'contact by phone';
+		$this->view('contact/phone');
 	}
 }
