@@ -1,5 +1,5 @@
 <?php
-include('../app/core/DB.php');
+//include('../app/core/DB.php');
 
 class Home extends Controller{
 	public function index($name= '')
