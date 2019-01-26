@@ -5,14 +5,10 @@ class Blog extends Controller
 {
 	public function index($name= '')
 	{
-/*
-			if(!DB::query('SELECT * FROM cms_content')){
-        echo "win";
-      }
-*/
-
-
-		$this->view('blog/index');
+		$user = $this->model('User');
+		$user->userType = "new";
+		//$user->userType = $_DB;/// Change to DB value
+		$this->view('blog/index', ['userType' => $user->userType]);
 	}
 
 
@@ -23,9 +19,10 @@ class Blog extends Controller
         echo "win";
       }
 */
+		$user = $this->model('User');
+		$user->userType = "home";
 
-
-		$this->view('blog/posts');
+		$this->view('blog/posts', ['userType' => $user->userType]);
 	}
 
 

@@ -1,5 +1,7 @@
 <?php include('../app/views/inc/header.php'); ?>
-<h1>Blog</h1>
+
+
+<?php  echo $data['getRaw']; ?>
 
 
 <?php include('../app/views/inc/footer.php'); ?>

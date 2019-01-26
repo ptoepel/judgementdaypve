@@ -1,4 +1,4 @@
-//CSS Theme for Miscreated Damage Logs
+
 
 
 table {
@@ -6,6 +6,7 @@ table {
    border-spacing: 0;
    width: 100%;
    border: 1px solid #ddd;
+   font-size:10px;
 }
 
 th, td {
@@ -15,26 +16,32 @@ th, td {
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
-
+tr:nth-child(odd){background-color: #c2c2c2}
 /* Structure */
 
 
 body{
-    background-image: url("./gaming-pattern/gaming-pattern.png");
-	background-repeat: repeat;
+    background-image: url("./images/the_cross.jpg");
+	background-repeat: center;
 	font-family: 'Rubik', sans-serif;
+  -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
+/*
 .container{
-	margin:10 auto;
+  margin:10 auto;
 	width:970px;
-	background-color:white;
+	background: rgba(0, 0, 0, 0.5);
 	border:1px solid #C2C2C2;
 	padding:12px 12px;
 }
+*/
 nav {
 
 }
-header{}
+
 
 
 
@@ -44,7 +51,6 @@ header{}
 
 
 #menu{
-    left: 20px;
     font-size: 2em;
     font-weight: 800;
     z-index: 111;
@@ -53,11 +59,16 @@ header{}
     transition: all 0.5s;
     -webkit-transition: all 0.25s;
     position: absolute;
+    right:0;
+    top:0;
+    display: -webkit-inline-box;
+    margin: 10px 30px;
+    color:#9A7D31;
 }
 
 #menu:hover{
     transform: rotate(90deg);
-    color: #C2C2C2;
+    color: #9A7D31;
 }
 
 ul{
@@ -116,10 +127,49 @@ li:hover{
     -webkit-transition: all 0.25s;
 }
 #exit:hover{
-    color:#C2C2C2;
+    color:#9A7D31;
 }
 
 #lgMenu.enter{
     opacity: 1;
     left: 0;
+}
+
+
+/*HEader*/
+header {
+  	background: rgba(0, 0, 0, 0.5);
+  height:60px;
+  border-bottom:#000 1px solid;
+  display:-webkit-box;
+}
+
+header h1{
+  color:#9A7D31;
+
+  display: -webkit-inline-box;
+
+}
+
+
+/*Footer*/
+footer {
+  /*background-color:#c2c2c2;*/
+  	background: rgba(0, 0, 0, 0.5);
+  height:60px;
+  border-bottom:white 1px solid;
+
+}
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
 }

@@ -1,4 +1,4 @@
 <?php include('../app/views/inc/header.php'); ?>
-<?php //echo $data['name']; ?>
+<h1>Home</h1>
 
 <?php include('../app/views/inc/footer.php'); ?>
