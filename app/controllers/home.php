@@ -5,7 +5,7 @@ class Home extends Controller{
 	public function index($name= '')
 	{
 		$user = $this->model('User');
-		$user->userType = "new";
+		$user->userType = "customer";
 		//$user->userType = $_DB;/// Change to DB value
 		$this->view('home/index', ['userType' => $user->userType]);
 	}

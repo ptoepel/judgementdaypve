@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/styles.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/theme.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet"> <!-- Google Font Styling-->
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -41,6 +41,7 @@ $("#menu").on("click", function(){
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/apply/index" >Apply</a></li>
+      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/login/index">Login</a></li>
     <?php } ?>
       </ul>
 
