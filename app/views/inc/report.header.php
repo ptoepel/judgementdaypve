@@ -13,6 +13,12 @@
   <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/styles.css">
   <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/theme.css">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+
 <?php } ?>
 
 
@@ -32,28 +38,45 @@ $("#menu").on("click", function(){
     });
 });
 </script>
+<script>
+
+$(document).ready( function() {
+  $('.sub > a').click( function() {
+    $('.sub').find('.current').removeClass('current');
+    $(this).addClass('current');
+  });
+  $('aside > a').click( function() {
+    $('aside').find('.current').removeClass('current');
+    $(this).addClass('current');
+  });
+  $('.ntfy i').click( function() {
+    $(this).parent().toggleClass('gt').toggleClass('active');
+  });
+
+  var x = $('aside').width();
+  var margin = '50px 0 0 '+ x +'px';
+  var width = $(window).width() - x;
+  $('#main').css({
+    margin: margin,
+    width: width
+  });
+
+  $(window).resize(function() {
+    var x = $('aside').width();
+    var margin = '50px 0 0 '+ x +'px';
+    var width = $(window).width() - x;
+    $('#main').css({
+      margin: margin,
+      width: width
+    });
+  });
+});
+
+</script>
+
+
+
 </head>
 <body>
-  <header>
-    <h1>Judgement Day PVE</h1>
-    <div id="menu">|||</div>
-    <div id="lgMenu">
-      <span id="exit">&times;</span>
-    	<ul>
-      <?php if($data['userType'] == "customer"){?>
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/report/index" >Reports</a></li>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/contact/index" >Contact</a></li>
-    <?php }else{?>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/apply/index" >Apply</a></li>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/login/index">Login</a></li>
-    <?php } ?>
-      </ul>
 
-    </div>
-
-  </header>
 <div class="container">
