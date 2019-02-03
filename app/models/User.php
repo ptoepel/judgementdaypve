@@ -5,6 +5,7 @@ class User
   private $id;
 	public $userName;
 	public $password;
+  public $repeatPassword;
 	public $email;
 	public $firstName;
 	public $lastName;
@@ -19,12 +20,13 @@ class User
 
   }
 
-  function createPartialUser($username,$email,$steamID){
+  function createUser($username,$password,$repeatPassword,$email,$steamID){
 		$this->userName = $username;
+    $this->password = $password;
 		$this->$email = $email;
 		$this->steamID = $steamID;
-		$this->userType = "customer";
-		$this->isActive = 0;
+		$this->userType = "Survivor";
+		$this->isActive = 1;
 		Database::query('INSERT INTO users (userName,email,steamID,userType,isActive) VALUES(:userName,:email,:steamID,:userType,:isActive)', array(':userName'=> $this->userName, ':email' => $this->email,':steamID'=>$this->steamID,':userType' => $this->userType, ':isActive'=> $this->isActive ));
 	}
 
