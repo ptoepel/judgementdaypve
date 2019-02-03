@@ -21,7 +21,6 @@ class User
 
   function createPartialUser($username,$email,$steamID){
 		$this->userName = $username;
-
 		$this->$email = $email;
 		$this->steamID = $steamID;
 		$this->userType = "customer";

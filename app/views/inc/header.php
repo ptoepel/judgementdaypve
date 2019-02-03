@@ -45,6 +45,7 @@ $("#menu").on("click", function(){
     	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
     	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/report/index" >Reports</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/contact/index" >Contact</a></li>
+      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/login/index">Login</a></li>
     <?php }else{?>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
@@ -52,7 +53,6 @@ $("#menu").on("click", function(){
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/login/index">Login</a></li>
     <?php } ?>
       </ul>
-
     </div>
 
   </header>

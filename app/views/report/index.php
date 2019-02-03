@@ -16,7 +16,7 @@
         <a>Thursday</a>
         <a>Friday</a>
       </div>
-      <table class="sp-table sp-table-striped sp-table-hover">
+      <table class="sp-table sp-table-striped sp-table-hover" id="example">
         <thead>
           <tr>
             <th>Table Heading</th>
