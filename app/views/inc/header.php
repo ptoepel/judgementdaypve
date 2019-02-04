@@ -49,11 +49,18 @@ $("#menu").on("click", function(){
     <?php }else{?>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
-      <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/apply/index" >Apply</a></li>
       <li><a href="http://localhost/miscreated-dmg-log-dashboard/public/login/index">Login</a></li>
     <?php } ?>
       </ul>
     </div>
-
+    <form action="login" method="POST">
+      <input class="" name="userName"/>
+      <input class="" name="password" type="password"/>
+      <input class="" type="submit" name="userLogin">
+    </form>
+    <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/register">Register</a>
+    <?php //if ($user->isActive == 1){ ?>
+    <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/logout">Logout</a>
+  <?php// } ?>
   </header>
 <div class="container">
