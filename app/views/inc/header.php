@@ -53,11 +53,23 @@ $("#menu").on("click", function(){
     <?php } ?>
       </ul>
     </div>
-    <form action="login" method="POST">
-      <input class="" name="userName"/>
+    <div class="flashErr">
+      <ul>
+      <?php
+        if(isset($data['flashErr'])){
+          foreach($data['flashErr'] as $error){
+            echo "<li>". $error ."</li>";
+          }
+        }
+      ?>
+      </ul>
+    </div>
+    <form action="http://localhost/miscreated-dmg-log-dashboard/public/home/userLogin" method="POST">
+      <input class="" name="email"/>
       <input class="" name="password" type="password"/>
       <input class="" type="submit" name="userLogin">
     </form>
+
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/register">Register</a>
     <?php //if ($user->isActive == 1){ ?>
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/logout">Logout</a>

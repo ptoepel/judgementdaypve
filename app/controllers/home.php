@@ -1,7 +1,14 @@
 <?php
-require_once('../app/core/Database.php');
 
 class Home extends Controller{
+  public $user;
+  private $passwordHash;
+  private $email;
+
+	public function __construct(){
+		$this->user = $this->model('User');
+
+	}
 
 	public function index()
 	{
@@ -18,10 +25,8 @@ class Home extends Controller{
 
 	public function registerUser(){
 		if(isset($_POST['registerUser'])){
-			$user = $this->model('User');
 
 			$nameErr = array();
-			$fieldsReturned = array();
 
 			// UserName Validation
 			if (empty($_POST['userName'])) {
@@ -49,13 +54,11 @@ class Home extends Controller{
 				$nameErr[] = "Password is required";
 			}else{
 				if(strlen($_POST['password']) > 6 && strlen($_POST['password'] <= 60)){
-
+          $this->passwordHash = 	password_hash($_POST['password'], PASSWORD_BCRYPT);
 				}else{
 					$nameErr[] = "Your password needs to be greater than 6 characters but less than 60";
 				}
 
-
-				$userName = filter_var($_POST['userName'], FILTER_SANITIZE_STRING);
 			}//END Password Validation
 
 			//Repeat Password Validation
@@ -74,9 +77,9 @@ class Home extends Controller{
 				$nameErr[] = "Email is required";
 			}else{
 				if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-						$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+						$this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 				}else{
-				$nameErr[] = "Not an email format";
+				    $nameErr[] = "Not an email format";
 				}
 			}
 
@@ -94,9 +97,9 @@ class Home extends Controller{
 
 			}else{
 
-			if(isset($username) && isset($password) && isset($steamID) && isset($email))
-			$user->createUser($userName,$email,$steamID);
-			$this->view('home/register',['userData'=> $user]);
+
+			$this->user->registerUser($userName,$this->passwordHash,$this->email,$steamID);
+			$this->view('home/register',['userData'=> $this->user]);
 			}
 
 		}// Log in registerUser is set
@@ -105,46 +108,49 @@ class Home extends Controller{
 	}//End CreateUser Method
 
 
-	public function loginUser(){
-
-		$user = $this->model('User');
-
-		$nameErr = array();
+	public function userLogin(){
+	if(isset($_POST['userLogin'])){
+		$flashErr = array();
 		// First Name
 
-		if (empty($_POST['email'])) {
-			$nameErr[] = "user name is required";
+		if(empty($_POST['email'])) {
+			$flashErr[] = "email is required";
 		}else{
-			$userName = filter_var($_POST['userName'], FILTER_SANITIZE_STRING);
+			if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+				$this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+			}else{
+				$flashErr[] = "email needs to be in a string format";
+			}
 		}
-
 
 		//Password Validation
 		if (empty($_POST['password'])) {
-			$nameErr[] = "Password is required";
+			$flashErr[] = "Password is required";
 		}else{
 			if(strlen($_POST['password']) > 6 && strlen($_POST['password'] <= 60)){
-
+					$this->passwordHash = 	password_hash($_POST['password'], PASSWORD_BCRYPT);
 			}else{
-				$nameErr[] = "Your password needs to be greater than 6 characters but less than 60";
+				$flashErr[] = "Your password needs to be greater than 6 characters but less than 60";
 			}
-
-
-			$userName = filter_var($_POST['userName'], FILTER_SANITIZE_STRING);
 		}//END Password Validation
 
-		if($success == 1){
-			$this->view('survivor/home',['userData'=> $user]);
-		}elseif($userType == "admin"){
-			$this->view('admin/home',['userData'=> $user]);
+
+
+		//$user->Login($email,$password);
+		$result = $this->user->userLogin($this->email,$this->passwordHash);
+
+
+		if($result[0] == 1){
+			$this->view('survivor/index');
 		}else{
+      $this->flashErr = "Wrong!";
 			$this->view('home/index',['flashErr'=> $flashErr]);
-		}
+    }
 
 	}// LOGIN USER END
 
 
-
+}
 
 
 

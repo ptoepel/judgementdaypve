@@ -1,5 +1,4 @@
 <?php
-include('../app/core/Database.php');
 
 class Map extends Controller
 {

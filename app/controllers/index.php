@@ -1,5 +1,5 @@
 <?php
-include('../app/core/DB.php');
+
 
 class Index extends Controller
 {
