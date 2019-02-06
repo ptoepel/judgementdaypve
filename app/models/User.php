@@ -4,6 +4,7 @@ class User
   private $id;
 	private $userName;
 	private $password;
+  private $hashedPassword;
 	private $email;
 	private $steamID;
 	private $userType;
@@ -22,8 +23,6 @@ class User
 		$this->steamID = $steamID;
 		$this->userType = "Survivor";
 		$this->isActive = 1;
-    print_r($email);
-    print_r($this->email);
 		Database::query('INSERT INTO users (userName,password,email,steamID,userType,isActive) VALUES(:userName,:password,:email,:steamID,:userType,:isActive)', array(':userName'=> $this->userName,':password'=>$this->password,':email' => $email,':steamID'=>$this->steamID,':userType' => $this->userType, ':isActive'=> $this->isActive ));
 	}
 
@@ -44,8 +43,26 @@ class User
   function userLogin($email,$password){
     $this->email = $email;
     $this->password = $password;
-    $result = Database::query('SELECT COUNT(*) FROM users WHERE email=:email && password=:password',array(':email'=>$email,':password'=>$password));
-    return $result;
+
+    $result = Database::query('SELECT * FROM users WHERE email=:email',array(':email'=>$email));
+
+    $num_rows = count($result);
+    if($num_rows == 0 || empty($num_rows)){
+      $flashErr[] = "no such email";
+    }else{
+      password_verify($password,$result[0]['password']);
+      if(password_verify($password,$result[0]['password']) == 1){
+      return true;
+      exit();
+      }else{
+        $flashErr[] = "passwords do not match";
+
+      }
+
+    }
+
+
   }
+
 
 }

@@ -2,6 +2,7 @@
 
 class Home extends Controller{
   public $user;
+  private $password;
   private $passwordHash;
   private $email;
 
@@ -128,7 +129,7 @@ class Home extends Controller{
 			$flashErr[] = "Password is required";
 		}else{
 			if(strlen($_POST['password']) > 6 && strlen($_POST['password'] <= 60)){
-					$this->passwordHash = 	password_hash($_POST['password'], PASSWORD_BCRYPT);
+					$this->password = 	$_POST['password'];
 			}else{
 				$flashErr[] = "Your password needs to be greater than 6 characters but less than 60";
 			}
@@ -137,10 +138,10 @@ class Home extends Controller{
 
 
 		//$user->Login($email,$password);
-		$result = $this->user->userLogin($this->email,$this->passwordHash);
+		$result = $this->user->userLogin($this->email,$this->password);
 
 
-		if($result[0] == 1){
+		if($result == true){
 			$this->view('survivor/index');
 		}else{
       $this->flashErr = "Wrong!";
