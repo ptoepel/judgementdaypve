@@ -52,8 +52,13 @@ class User
     }else{
       password_verify($password,$result[0]['password']);
       if(password_verify($password,$result[0]['password']) == 1){
-      return true;
-      exit();
+        /*
+          SESSION SET REWORK
+        */
+        $_SESSION['userName'] = $result[0]['userName'];
+
+
+
       }else{
         $flashErr[] = "passwords do not match";
 
@@ -61,7 +66,11 @@ class User
 
     }
 
-
+        if (isset($flashErr)) {
+        return $flashErr;  // code...
+      }else{
+        return true;
+      }
   }
 
 

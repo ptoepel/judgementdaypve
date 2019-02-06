@@ -138,15 +138,15 @@ class Home extends Controller{
 
 
 		//$user->Login($email,$password);
-		$result = $this->user->userLogin($this->email,$this->password);
+		$checkValue = $this->user->userLogin($this->email,$this->password);
 
-
-		if($result == true){
+		if($checkValue == true){
 			$this->view('survivor/index');
 		}else{
-      $this->flashErr = "Wrong!";
-			$this->view('home/index',['flashErr'=> $flashErr]);
+        $this->view('home/index',['flashErr' => $flashErr] );
+
     }
+
 
 	}// LOGIN USER END
 
@@ -154,6 +154,102 @@ class Home extends Controller{
 }
 
 
+public function userReset($email,$repeatEmail){
+if(isset($_POST['userReset'])){
+
+  $selector = bin2hex(random_bytes(8));
+  $token = random_bytes(32);
+  $url = "www.judgementdaypve.com/survivor-reset.php?=". $selector ."&validator=". bin2hex($token);
+
+  $expires = date("U") + 1800;
+
+
+
+
+  $flashErr = array();
+  // First Name
+
+  if(empty($_POST['email'])) {
+    $flashErr[] = "email is required";
+  }else{
+    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+      $this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+    }else{
+      $flashErr[] = "email needs to be in a string format";
+    }
+  }
+
+  Database::query('DELETE FROM userReset WHERE userResetEmail=:email','email'=> $this->email);
+
+  $hashedToken = password_hash($token,PASSWORD_DEFAULT);
+
+  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires);
+
+  $to = $email;
+
+  $subject =  'Reset Your Password for Judgement Day PVE';
+
+  $message =  '<p>Please click on the following link to reset your password</p><br/>';
+  $message .= '<a href="'. $url .'"> Reset Link </a></p>';
+
+  $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
+  $headers .= "Reply-To: judgementdaypve#gmail.com\r\n";
+  $headers .-  "Content-type: text/html\r\n";
+
+  mail($to,$subject,$message,$headers);
+
+
+
+
+  }
+
+
+}// LOGIN USER END
+
+public function userResetEmailReset($email,$repeatEmail){
+
+  $selector = $_GET['selector'];
+  $validator = $_GET['validator'];
+  if(empty($selector) ||empty($validator)){
+    echo"Could not validate your request!";
+
+  }else{
+    if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
+
+    }
+
+
+  }
+
+
+  Database::query('DELETE FROM userReset WHERE userResetEmail=:email','email'=> $this->email);
+
+  $hashedToken = password_hash($token,PASSWORD_DEFAULT);
+
+  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires);
+
+  $to = $email;
+
+  $subject =  'Reset Your Password for Judgement Day PVE';
+
+  $message =  '<p>Please click on the following link to reset your password</p><br/>';
+  $message .= '<a href="'. $url .'"> Reset Link </a></p>';
+
+  $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
+  $headers .= "Reply-To: judgementdaypve#gmail.com\r\n";
+  $headers .-  "Content-type: text/html\r\n";
+
+  mail($to,$subject,$message,$headers);
+
+
+
+
+  }
+
+  public function userPasswordReset(){
+
+    $this->view('home/reset');
+  }
 
 
 
@@ -162,12 +258,4 @@ class Home extends Controller{
 
 
 
-
-
-
-
-
-
-
-
-}//End Class
+} // End CLass

@@ -6,9 +6,8 @@ class Report extends Controller
 		$raw = $this->model('Single');
 		$user= $this->model('User');
 
-		$user->userType = "customer";
 		//$user->userType = $_DB;/// Change to DB value
-		$this->view('report/index', ['userType' => $user->userType, 'topKills' => $raw->topKills(),'getRaw' => $raw->getRaw()]);
+		$this->view('report/index', ['topKills' => $raw->topKills(),'getRaw' => $raw->getRaw()]);
 	}
 
 

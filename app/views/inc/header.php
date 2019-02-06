@@ -32,6 +32,18 @@ $("#menu").on("click", function(){
     });
 });
 </script>
+
+<script>
+/*
+$(document).ready(function()){
+$('email').keyup(function(){
+    var email = $("email").val();\
+    $.post("home/userLogin");
+});
+});
+*/
+</script>
+
 </head>
 <body>
   <header>
@@ -71,8 +83,8 @@ $("#menu").on("click", function(){
     </form>
 
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/register">Register</a>
-    <?php //if ($user->isActive == 1){ ?>
+    <?php if (isset($_SESSION['userName'])){ ?>
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/logout">Logout</a>
-  <?php// } ?>
+  <?php } ?>
   </header>
 <div class="container">
