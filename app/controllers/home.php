@@ -237,8 +237,6 @@ if(isset($_POST['userPasswordReset']))
     }else{
       $currentDate = date("U");
       $result = Database::query("SELECT * FROM userpwdreset WHERE userResetSelector=:userResetSelector AND userResetExpires >= :userResetExpires",array('userResetSelector' => $selector,'userResetExpires' => $currentDate));
-
-
       if (count($result[0]) == 0){
         $error[] = "you need to re-submit your resquest";
       }else{
@@ -246,7 +244,6 @@ if(isset($_POST['userPasswordReset']))
         $tokenCheck = password_verify($tokenBin, $result[0]['validator']);
         if($tokenCheck == false){
           $error[] = "You need to re-submit your request";
-
         }elseif($tokenCheck == true){
           $tokenEmail = $result[0]['userResetEmail'];
            $result2 = Database::query("SELECT * FROM users WHERE email=:email",array(':email' => $tokenEmail));
