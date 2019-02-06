@@ -153,8 +153,13 @@ class Home extends Controller{
 
 }
 
+public function reset(){
 
-public function userReset($email,$repeatEmail){
+  $this->view('home/reset');
+}
+
+
+public function userReset(){
 if(isset($_POST['userReset'])){
 
   $selector = bin2hex(random_bytes(8));
@@ -173,17 +178,17 @@ if(isset($_POST['userReset'])){
     $flashErr[] = "email is required";
   }else{
     if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-      $this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+      $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
     }else{
       $flashErr[] = "email needs to be in a string format";
     }
   }
 
-  Database::query('DELETE FROM userReset WHERE userResetEmail=:email','email'=> $this->email);
+  Database::query('DELETE FROM userpwdreset WHERE userResetEmail=:email',array(':email' => $this->email));
 
   $hashedToken = password_hash($token,PASSWORD_DEFAULT);
 
-  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires);
+  Database::query('INSERT INTO userpwdreset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $email,':selector'=>$selector,':token'=> $hashedToken,':expires'=>$expires));
 
   $to = $email;
 
@@ -193,8 +198,8 @@ if(isset($_POST['userReset'])){
   $message .= '<a href="'. $url .'"> Reset Link </a></p>';
 
   $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
-  $headers .= "Reply-To: judgementdaypve#gmail.com\r\n";
-  $headers .-  "Content-type: text/html\r\n";
+  $headers .= "Reply-To: judgementdaypve@gmail.com\r\n";
+  $headers .=  "Content-type: text/html\r\n";
 
   mail($to,$subject,$message,$headers);
 
@@ -222,11 +227,11 @@ public function userResetEmailReset($email,$repeatEmail){
   }
 
 
-  Database::query('DELETE FROM userReset WHERE userResetEmail=:email','email'=> $this->email);
+  Database::query('DELETE FROM userReset WHERE userResetEmail=:email',array('email'=> $this->email));
 
   $hashedToken = password_hash($token,PASSWORD_DEFAULT);
 
-  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires);
+  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires));
 
   $to = $email;
 
@@ -246,10 +251,7 @@ public function userResetEmailReset($email,$repeatEmail){
 
   }
 
-  public function userPasswordReset(){
 
-    $this->view('home/reset');
-  }
 
 
 

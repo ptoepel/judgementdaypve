@@ -83,6 +83,7 @@ $('email').keyup(function(){
     </form>
 
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/register">Register</a>
+    <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/reset">Reset</a>
     <?php if (isset($_SESSION['userName'])){ ?>
     <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/logout">Logout</a>
   <?php } ?>

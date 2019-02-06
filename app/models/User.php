@@ -26,19 +26,27 @@ class User
 		Database::query('INSERT INTO users (userName,password,email,steamID,userType,isActive) VALUES(:userName,:password,:email,:steamID,:userType,:isActive)', array(':userName'=> $this->userName,':password'=>$this->password,':email' => $email,':steamID'=>$this->steamID,':userType' => $this->userType, ':isActive'=> $this->isActive ));
 	}
 
+
+
   function getUserID($id){
 		$this->id = $id;
    	Database::query('SELECT userName,password,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
 	}
 
 
+
+
   function setUserName(){
 
 	}
 
+
+
 	function getUserName(){
 
 	}
+
+
 
   function userLogin($email,$password){
     $this->email = $email;
@@ -47,6 +55,7 @@ class User
     $result = Database::query('SELECT * FROM users WHERE email=:email',array(':email'=>$email));
 
     $num_rows = count($result);
+    
     if($num_rows == 0 || empty($num_rows)){
       $flashErr[] = "no such email";
     }else{
@@ -66,7 +75,7 @@ class User
 
     }
 
-        if (isset($flashErr)) {
+      if (isset($flashErr)) {
         return $flashErr;  // code...
       }else{
         return true;

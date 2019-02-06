@@ -2,7 +2,7 @@
 <h1>Reset Password</h1>
 <section>
 
-<form action="/userReset" method="POST">
+<form action="http://localhost/miscreated-dmg-log-dashboard/public/home/userReset" method="POST">
   <input type="email" name="email"/>
   <input type="submit" name="userReset" />
 </form>
