@@ -162,7 +162,7 @@ if(isset($_POST['userReset'])){
 
   $selector = bin2hex(random_bytes(8));
   $token = random_bytes(32);
-  $url = "www.judgementdaypve.com/survivor-reset.php?=". $selector ."&validator=". bin2hex($token);
+  $url = "www.judgementdaypve.com/userResetEmail.php?selector=". $selector ."&validator=". bin2hex($token);
 
   $expires = date("U") + 1800;
 
@@ -184,7 +184,7 @@ if(isset($_POST['userReset'])){
 
   Database::query('DELETE FROM userpwdreset WHERE userResetEmail=:email',array(':email' => $this->email));
 
-  $hashedToken = password_hash($token,PASSWORD_DEFAULT);
+  $hashedToken = password_hash($token,PASSWORD_BCRYPT);
 
   Database::query('INSERT INTO userpwdreset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $email,':selector'=>$selector,':token'=> $hashedToken,':expires'=>$expires));
 
@@ -209,49 +209,70 @@ if(isset($_POST['userReset'])){
 
 }// LOGIN USER END
 
-public function userResetEmailReset($email,$repeatEmail){
+public function userResetEmail(){
 
   $selector = $_GET['selector'];
   $validator = $_GET['validator'];
   if(empty($selector) ||empty($validator)){
-    echo"Could not validate your request!";
-
+    echo "Could not validate your request!";
   }else{
     if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
-
+      $this->view('home/passwordreset',['selector' => $selector,'validator' => $validator]);
     }
-
-
   }
 
-
-  Database::query('DELETE FROM userReset WHERE userResetEmail=:email',array('email'=> $this->email));
-
-  $hashedToken = password_hash($token,PASSWORD_DEFAULT);
-
-  Database::query('INSERT INTO userReset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $this->email,':selector'=>$this->selector,':token'=> $hashedToken,':expires'=>$expires));
-
-  $to = $email;
-
-  $subject =  'Reset Your Password for Judgement Day PVE';
-
-  $message =  '<p>Please click on the following link to reset your password</p><br/>';
-  $message .= '<a href="'. $url .'"> Reset Link </a></p>';
-
-  $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
-  $headers .= "Reply-To: judgementdaypve#gmail.com\r\n";
-  $headers .=  "Content-type: text/html\r\n";
-
-  mail($to,$subject,$message,$headers);
+} // userResetEmail
 
 
 
+public function passwordReset(){
+if(isset($_POST['userPasswordReset']))
+  $selector =  $_POST['selector'];
+  $validator = $_POST['validator'];
+  if(empty($password) || empty($repeatPassword)){
+    $error[] = "all fields are required";
+  }else{
+    if($password != $passwordRepeat){
+      $error[] = "The password fields do not match";
+    }else{
+      $currentDate = date("U");
+      $result = Database::query("SELECT * FROM userpwdreset WHERE userResetSelector=:userResetSelector AND userResetExpires >= :userResetExpires",array('userResetSelector' => $selector,'userResetExpires' => $currentDate));
 
+
+      if (count($result[0]) == 0){
+        $error[] = "you need to re-submit your resquest";
+      }else{
+        $tokenBin = hex2bin($validator);
+        $tokenCheck = password_verify($tokenBin, $result[0]['validator']);
+        if($tokenCheck == false){
+          $error[] = "You need to re-submit your request";
+
+        }elseif($tokenCheck == true){
+          $tokenEmail = $result[0]['userResetEmail'];
+           $result2 = Database::query("SELECT * FROM users WHERE email=:email",array(':email' => $tokenEmail));
+           if (count($result2[0]) == 0){
+             $error[] = "you need to re-submit your resquest";
+           }else{
+             $passwordHash = password_hash($password,PASSWORD_BCRYPT);
+             $result3 = Database::query("UPDATE users WHERE password=:password AND email = :email",array(':password' => $passwordHash,':email' => $tokenEmail));
+             if (count($result3[0]) == 0){
+               $error[] = "there was an error";
+             }else{
+               $result4 = Database::query("DELETE FROM userpwdreset WHERE userResetEmail=:email",array(':email' => $tokenEmail));
+               $success = "successfully changed your password";
+               $this->view('home/passwordreset',['success' => $success]);
+             }
+           }
+        }
+
+
+
+
+      }
+    }
   }
 
-
-
-
+} // userResetEmail
 
 
 
