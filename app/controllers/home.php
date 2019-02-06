@@ -13,8 +13,6 @@ class Home extends Controller{
 
 	public function index()
 	{
-		//$user = $this->model('User');
-
 		$this->view('home/index');
 	}
 
@@ -242,7 +240,7 @@ public function userResetEmailReset($email,$repeatEmail){
 
   $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
   $headers .= "Reply-To: judgementdaypve#gmail.com\r\n";
-  $headers .-  "Content-type: text/html\r\n";
+  $headers .=  "Content-type: text/html\r\n";
 
   mail($to,$subject,$message,$headers);
 
