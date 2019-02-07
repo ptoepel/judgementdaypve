@@ -108,109 +108,107 @@ class Home extends Controller{
 
 
 	public function userLogin(){
-	if(isset($_POST['userLogin'])){
-		$flashErr = array();
-		// First Name
+  	if(isset($_POST['userLogin'])){
+  		$flashErr = array();
+  		// First Name
 
-		if(empty($_POST['email'])) {
-			$flashErr[] = "email is required";
-		}else{
-			if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-				$this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-			}else{
-				$flashErr[] = "email needs to be in a string format";
-			}
-		}
+  		if(empty($_POST['email'])) {
+  			$flashErr[] = "email is required";
+  		}else{
+  			if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+  				$this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+  			}else{
+  				$flashErr[] = "email needs to be in a string format";
+  			}
+  		}
 
-		//Password Validation
-		if (empty($_POST['password'])) {
-			$flashErr[] = "Password is required";
-		}else{
-			if(strlen($_POST['password']) > 6 && strlen($_POST['password'] <= 60)){
-					$this->password = 	$_POST['password'];
-			}else{
-				$flashErr[] = "Your password needs to be greater than 6 characters but less than 60";
-			}
-		}//END Password Validation
-
-
-
-		//$user->Login($email,$password);
-		$checkValue = $this->user->userLogin($this->email,$this->password);
-
-		if($checkValue == true){
-			$this->view('survivor/index');
-		}else{
-        $this->view('home/index',['flashErr' => $flashErr] );
-
-    }
-
-
-	}// LOGIN USER END
-
-
-}
-
-public function reset(){
-
-  $this->view('home/reset');
-}
-
-
-public function userReset(){
-if(isset($_POST['userReset'])){
-
-  $selector = bin2hex(random_bytes(8));
-  $token = random_bytes(32);
-  $url = "www.judgementdaypve.com/userResetEmail.php?selector=". $selector ."&validator=". bin2hex($token);
-
-  $expires = date("U") + 1800;
+  		//Password Validation
+  		if (empty($_POST['password'])) {
+  			$flashErr[] = "Password is required";
+  		}else{
+  			if(strlen($_POST['password']) > 6 && strlen($_POST['password'] <= 60)){
+  					$this->password = 	$_POST['password'];
+  			}else{
+  				$flashErr[] = "Your password needs to be greater than 6 characters but less than 60";
+  			}
+  		}//END Password Validation
 
 
 
+  		//$user->Login($email,$password);
+  		$checkValue = $this->user->userLogin($this->email,$this->password);
 
-  $flashErr = array();
-  // First Name
+  		if($checkValue == true){
+  			$this->view('survivor/index');
+  		}else{
+          $this->view('home/index',['flashErr' => $flashErr] );
 
-  if(empty($_POST['email'])) {
-    $flashErr[] = "email is required";
-  }else{
-    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-      $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+      }
+
+
+  	}// LOGIN USER END
+
+
+  }
+
+  public function reset(){
+    $this->view('home/reset');
+  }
+
+
+  public function userReset(){
+    if(isset($_POST['userReset'])){
+
+    $selector = bin2hex(random_bytes(8));
+    $token = random_bytes(32);
+    $url = "www.judgementdaypve.com/userResetEmail.php?selector=". $selector ."&validator=". bin2hex($token);
+
+    $expires = date("U") + 1800;
+
+
+
+
+    $flashErr = array();
+    // First Name
+
+    if(empty($_POST['email'])) {
+      $flashErr[] = "email is required";
     }else{
-      $flashErr[] = "email needs to be in a string format";
+      if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+      }else{
+        $flashErr[] = "email needs to be in a string format";
+      }
     }
-  }
 
-  Database::query('DELETE FROM userpwdreset WHERE userResetEmail=:email',array(':email' => $this->email));
+    Database::query('DELETE FROM userpwdreset WHERE userResetEmail=:email',array(':email' => $this->email));
 
-  $hashedToken = password_hash($token,PASSWORD_BCRYPT);
+    $hashedToken = password_hash($token,PASSWORD_BCRYPT);
 
-  Database::query('INSERT INTO userpwdreset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $email,':selector'=>$selector,':token'=> $hashedToken,':expires'=>$expires));
+    Database::query('INSERT INTO userpwdreset (userResetEmail,userResetSelector,userResetToken,userResetExpires) VALUES (:email,:selector,:token,:expires)',array(':email'=> $email,':selector'=>$selector,':token'=> $hashedToken,':expires'=>$expires));
 
-  $to = $email;
+    $to = $email;
 
-  $subject =  'Reset Your Password for Judgement Day PVE';
+    $subject =  'Reset Your Password for Judgement Day PVE';
 
-  $message =  '<p>Please click on the following link to reset your password</p><br/>';
-  $message .= '<a href="'. $url .'"> Reset Link </a></p>';
+    $message =  '<p>Please click on the following link to reset your password</p><br/>';
+    $message .= '<a href="'. $url .'"> Reset Link </a></p>';
 
-  $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
-  $headers .= "Reply-To: judgementdaypve@gmail.com\r\n";
-  $headers .=  "Content-type: text/html\r\n";
+    $headers =  "From: Judement Day PVE <judgmentdaypve@gmail.com>\r\n";
+    $headers .= "Reply-To: judgementdaypve@gmail.com\r\n";
+    $headers .=  "Content-type: text/html\r\n";
 
-  mail($to,$subject,$message,$headers);
-
+    mail($to,$subject,$message,$headers);
 
 
 
-  }
+
+    }
 
 
-}// LOGIN USER END
+  }// LOGIN USER END
 
 public function userResetEmail(){
-
   $selector = $_GET['selector'];
   $validator = $_GET['validator'];
   if(empty($selector) ||empty($validator)){
@@ -220,58 +218,51 @@ public function userResetEmail(){
       $this->view('home/passwordreset',['selector' => $selector,'validator' => $validator]);
     }
   }
-
 } // userResetEmail
 
 
 
-public function passwordReset(){
-if(isset($_POST['userPasswordReset']))
-  $selector =  $_POST['selector'];
-  $validator = $_POST['validator'];
-  if(empty($password) || empty($repeatPassword)){
-    $error[] = "all fields are required";
-  }else{
-    if($password != $passwordRepeat){
-      $error[] = "The password fields do not match";
-    }else{
-      $currentDate = date("U");
-      $result = Database::query("SELECT * FROM userpwdreset WHERE userResetSelector=:userResetSelector AND userResetExpires >= :userResetExpires",array('userResetSelector' => $selector,'userResetExpires' => $currentDate));
-      if (count($result[0]) == 0){
-        $error[] = "you need to re-submit your resquest";
+  public function passwordReset(){
+    if(isset($_POST['userPasswordReset'])){
+      $selector =  $_POST['selector'];
+      $validator = $_POST['validator'];
+      if(empty($password) || empty($repeatPassword)){
+        $error[] = "all fields are required";
       }else{
-        $tokenBin = hex2bin($validator);
-        $tokenCheck = password_verify($tokenBin, $result[0]['validator']);
-        if($tokenCheck == false){
-          $error[] = "You need to re-submit your request";
-        }elseif($tokenCheck == true){
-          $tokenEmail = $result[0]['userResetEmail'];
-           $result2 = Database::query("SELECT * FROM users WHERE email=:email",array(':email' => $tokenEmail));
-           if (count($result2[0]) == 0){
-             $error[] = "you need to re-submit your resquest";
-           }else{
-             $passwordHash = password_hash($password,PASSWORD_BCRYPT);
-             $result3 = Database::query("UPDATE users WHERE password=:password AND email = :email",array(':password' => $passwordHash,':email' => $tokenEmail));
-             if (count($result3[0]) == 0){
-               $error[] = "there was an error";
-             }else{
-               $result4 = Database::query("DELETE FROM userpwdreset WHERE userResetEmail=:email",array(':email' => $tokenEmail));
-               $success = "successfully changed your password";
-               $this->view('home/passwordreset',['success' => $success]);
-             }
-           }
+        if($password != $passwordRepeat){
+          $error[] = "The password fields do not match";
+        }else{
+          $currentDate = date("U");
+          $result = Database::query("SELECT * FROM userpwdreset WHERE userResetSelector=:userResetSelector AND userResetExpires >= :userResetExpires",array('userResetSelector' => $selector,'userResetExpires' => $currentDate));
+          if (count($result[0]) == 0){
+            $error[] = "you need to re-submit your resquest";
+          }else{
+            $tokenBin = hex2bin($validator);
+            $tokenCheck = password_verify($tokenBin, $result[0]['validator']);
+            if($tokenCheck == false){
+              $error[] = "You need to re-submit your request";
+            }elseif($tokenCheck == true){
+              $tokenEmail = $result[0]['userResetEmail'];
+               $result2 = Database::query("SELECT * FROM users WHERE email=:email",array(':email' => $tokenEmail));
+               if (count($result2[0]) == 0){
+                 $error[] = "you need to re-submit your resquest";
+               }else{
+                 $passwordHash = password_hash($password,PASSWORD_BCRYPT);
+                 $result3 = Database::query("UPDATE users WHERE password=:password AND email = :email",array(':password' => $passwordHash,':email' => $tokenEmail));
+                 if (count($result3[0]) == 0){
+                   $error[] = "there was an error";
+                 }else{
+                   $result4 = Database::query("DELETE FROM userpwdreset WHERE userResetEmail=:email",array(':email' => $tokenEmail));
+                   $success = "successfully changed your password";
+                   $this->view('home/passwordreset',['success' => $success]);
+                 }
+               }
+            }
+          }
         }
-
-
-
-
       }
-    }
+    } // userResetEmail
   }
-
-} // userResetEmail
-
-
 
 
 
