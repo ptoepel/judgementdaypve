@@ -1,7 +1,9 @@
 <?php include('../app/views/inc/header.php'); ?>
+
 <section>
   <article>
-    <h2>Register on Judgement Day PVE</h2>
+  <h1 class="lg-heading">Register</span></h1>
+<h2 class="sm-heading"> Register For Our Site</h2>
   </article>
   <section class="errors">
     <?php

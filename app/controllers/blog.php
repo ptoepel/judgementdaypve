@@ -6,9 +6,8 @@ class Blog extends Controller
 	public function index($name= '')
 	{
 		$user = $this->model('User');
-		$user->userType = "new";
 		//$user->userType = $_DB;/// Change to DB value
-		$this->view('blog/index', ['userType' => $user->userType]);
+		$this->view('blog/index');
 	}
 
 

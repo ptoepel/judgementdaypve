@@ -1,4 +1,5 @@
 <?php include('../app/views/inc/header.php'); ?>
+
 <h1>Apply</h1>
 <section>
   <article>
