@@ -6,7 +6,7 @@
 }
 
 body {
-    @include background;
+
     background:$primary-color;
     color:#fff;
     height:100%;
@@ -65,6 +65,7 @@ main{
 }
 
 #home {
+      @include background;
     overflow:hidden;
     h1{
         margin-top:20vh;
@@ -118,7 +119,7 @@ main{
     top:0;
     width:100%;
     opacity:0.9;
-    
+
 
     &.show{
         visibility:visible;
@@ -152,10 +153,10 @@ main{
        padding:0;
        background:darken($primary-color,5);
        list-style:none;
-       transform: translate3d(0, -100%, 0);
-       z-index: -2;
-       @include easeOut;
+       transform: translate3d(0, -100%,0);
        
+       @include easeOut;
+
        &.show{
            transform:translate3d(0,0,0);
            z-index: 5;
@@ -172,14 +173,25 @@ main{
        }
     }
 
+    &.branding{
+        background:$primary-color;
+        tranform: translate3d(0,-100,0);
+        @include easeOut;
+        
+        &.show{
+            transform:translate3d(0,100%,0);
+        }
+    
+    }
+
     .nav-item{
         transform:translate3d(600px,0,0);
         @include easeOut;
-    
+
         &.show{
             transform:translate3d(0,0,0);
         }
-    
+
         &.current >a {
             color:$secondary-color;
 
@@ -267,3 +279,32 @@ footer{
     background:rgba(153,149,103,0.8);
 
 }
+
+
+// Splash Page
+@keyframes filling {
+    from{
+      background-position: center 25%;
+    }
+    to {
+      background-position: center 50%;
+    }
+  }
+  
+  .container-text {
+    background-image:  url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    margin: 10px auto;
+    color:  #FFFFFF;
+    justify-content: center;
+    font-size: 8rem;
+    animation: filling 3s ease forwards;
+  }
+
+
+
+
+
+
+@import "_mobile";

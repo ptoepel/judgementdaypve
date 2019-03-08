@@ -1,7 +1,8 @@
 $primary-color: #4A4729;
 $secondary-color:#FFCB46;
 $show-home-image:true;
-$home-image:url('/xampp/htdocs/miscreated-dmg-log-dashboard/public/css/images/fire.jpg');
+
+$home-image:url('http://localhost/miscreated-dmg-log-dashboard/public/css/images/deadbody_hanging_in_snow.jpg');
 $background-opacity:0.9;
 
 @mixin easeOut(){
@@ -11,7 +12,7 @@ $background-opacity:0.9;
 @mixin background(){
 
     @if $show-home-image{
-        &#bg-img {
+        &#home{
             background: $home-image;
             background-attachment:fixed;
             background-size: cover;
@@ -27,5 +28,29 @@ $background-opacity:0.9;
             background: rgba($primary-color,$background-opacity)
         }
     }
-    
+
+}
+@mixin mediaSm{
+  @media screen and (max-width:500px){
+    @content;
+  }
+}
+
+@mixin mediaMd{
+  @media screen and (max-width:768px){
+    @content;
+  }
+}
+
+
+@mixin mediaLg{
+  @media screen and (max-width:769px) and (max-width:1170px){
+    @content;
+  }
+}
+
+@mixin mediaXl{
+  @media screen and (min-width:1171px){
+    @content;
+  }
 }

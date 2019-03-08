@@ -18,6 +18,9 @@ class Home extends Controller{
 
 
 
-
+	public function splash()
+	{
+		$this->view('home/splash');
+	}
 
 } // End CLass
