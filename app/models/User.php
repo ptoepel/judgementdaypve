@@ -49,8 +49,6 @@ class User
 
 
   function userLogin($email,$password){
-    $this->email = $email;
-    $this->password = $password;
 
     $result = Database::query('SELECT * FROM users WHERE email=:email',array(':email'=>$email));
 
@@ -64,11 +62,13 @@ class User
         /*
           SESSION SET REWORK
         */
-        $_SESSION['userName'] = $result[0]['userName'];
 
+        $_SESSION['userName'] = $result[0]['userName'];
+        $_SESSION['isActive'] = 1;
 
 
       }else{
+
         $flashErr[] = "passwords do not match";
 
       }
@@ -76,9 +76,17 @@ class User
     }
 
       if (isset($flashErr)) {
-        return $flashErr;  // code...
+          $val = array(
+            'flashErr' =>$flashErr,
+            'checkVal' =>false
+          );
+
+        return $val;  // code...
       }else{
-        return true;
+        $val = array(
+          'checkVal' =>true
+        );
+        return $val;
       }
   }
 

@@ -3,6 +3,13 @@
 
 class Login extends Controller
 {
+
+	public function __construct(){
+		$this->user = $this->model('User');
+
+	}
+
+
 	public function index()
 	{
 		$this->view('login/index');
@@ -101,6 +108,8 @@ class Login extends Controller
 
 	public function userLogin(){
   	if(isset($_POST['userLogin'])){
+
+			
   		$flashErr = array();
   		// First Name
 
@@ -127,13 +136,12 @@ class Login extends Controller
 
 
 
-  		//$user->Login($email,$password);
   		$checkValue = $this->user->userLogin($this->email,$this->password);
 
-  		if($checkValue == true){
+  		if($checkValue['checkVal'] == true){
   			$this->view('survivor/index');
   		}else{
-          $this->view('login/index',['flashErr' => $flashErr] );
+          $this->view('login/index',['flashErr' => $checkValue['flashErr']] );
 
       }
 
@@ -211,7 +219,9 @@ public function userResetEmail(){
     }
   }
 } // userResetEmail
-
+public function logout(){
+  
+} // Logout
 
 
   public function passwordReset(){

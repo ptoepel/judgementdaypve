@@ -1,9 +1,9 @@
 <?php include('../app/views/inc/header.php'); ?>
-
+<main id="register">
 <section>
   <article>
   <h1 class="lg-heading">Register</span></h1>
-<h2 class="sm-heading"> Register For Our Site</h2>
+<h2 class="sm-heading"> Register For Our Site. This will get you Whitelisted.</h2>
   </article>
   <section class="errors">
     <?php
@@ -39,5 +39,5 @@
   </form>
 </section>
 
-
+<main>
 <?php include('../app/views/inc/footer.php'); ?>

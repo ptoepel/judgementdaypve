@@ -11,7 +11,7 @@
 
 <?php }else{ ?>
   <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/styles.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/theme.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost/miscreated-dmg-log-dashboard/public/css/survivor-theme.css">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <?php } ?>
 
@@ -34,52 +34,51 @@ $("#menu").on("click", function(){
 </script>
 
 <script>
-/*
-$(document).ready(function()){
-$('email').keyup(function(){
-    var email = $("email").val();\
-    $.post("home/userLogin");
+$(document).ready(function() {
+  $('.mobile').click(function () {
+	  $('nav').toggleClass('active'); 
+   });
+  
+   $('nav ul li ul').each(function() {
+    $(this).before('<span class=\"arrow\"></span>');
+  });
+  
+  $('nav ul li').click(function() {
+    $(this).children('ul').toggleClass('active');
+     $(this).children('.arrow').toggleClass('rotate');
+  });
 });
-});
-*/
 </script>
 
 </head>
 <body>
   <header>
-    <h1>Survivor Pages</h1>
-    <div id="menu">|||</div>
-    <div id="lgMenu">
-      <span id="exit">&times;</span>
-    	<ul>
-
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/home/index">Home</a></li>
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/blog/index" >Blog</a></li>
-    	<li><a href="http://localhost/miscreated-dmg-log-dashboard/public/report/index" >Reports</a></li>
-
-
-      </ul>
-    </div>
-    <div class="flashErr">
-      <ul>
-      <?php
-        if(isset($data['flashErr'])){
-          foreach($data['flashErr'] as $error){
-            echo "<li>". $error ."</li>";
-          }
-        }
-      ?>
-      </ul>
-    </div>
-    <form action="http://localhost/miscreated-dmg-log-dashboard/public/home/userLogin" method="POST">
-      <input class="" name="email"/>
-      <input class="" name="password" type="password"/>
-      <input class="" type="submit" name="userLogin">
-    </form>
-
-    <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/register">Register</a>
-    <?php if (isset($_SESSION['userName'])){ ?>
-      <a href="http://localhost/miscreated-dmg-log-dashboard/public/home/logout">Logout</a>
-    <?php } ?>
+  <a class="mobile" href="#">&#9776;</a>
+<nav>
+  <ul>
+    
+    <li><a href="#">Link 1</a></li>
+    <li>
+        <a href="#">Link 2</a>
+        <ul>
+            <li><a href="#">Sublink 1</a></li>
+            <li><a href="#">Sublink 2</a></li>
+            <li><a href="#">Sublink 3</a></li>
+            <li><a href="#">Sublink 4</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Link 3</a></li>
+    <li><a href="#">Link 4</a>
+    <ul>
+            <li><a href="#">Sublink 1</a></li>
+            <li><a href="#">Sublink 2</a></li>
+            <li><a href="#">Sublink 3</a></li>
+            <li><a href="#">Sublink 4</a></li>
+        </ul></li>
+    <li><a href="#">Link 5</a></li>
+    <li><a href="#">Link 6</a></li>
+  </ul>
+  <div style="clear:both;"></div>
+</nav>
   </header>
 <div class="container">

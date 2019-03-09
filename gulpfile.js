@@ -20,3 +20,7 @@ gulp.task('sass-config',function(){
 gulp.task('sass-mobile',function(){
     return gulp.src('scss/mobile.scss').pipe(sass()).pipe(gulp.dest('public/css/'));
 });
+
+gulp.task('sass-survivor-theme',function(){
+    return gulp.src('scss/survivor-theme.scss').pipe(sass()).pipe(gulp.dest('public/css/'));
+});

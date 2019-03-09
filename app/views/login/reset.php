@@ -1,4 +1,5 @@
 <?php include('../app/views/inc/header.php'); ?>
+<main id="reset">
 <h1>Reset Password</h1>
 <section>
 
@@ -9,4 +10,5 @@
 
 
 </section>
+</main>
 <?php include('../app/views/inc/footer.php'); ?>

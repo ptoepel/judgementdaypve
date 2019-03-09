@@ -1,8 +1,12 @@
 <?php include('../app/views/inc/admin.header.php'); ?>
-<h1>Survivor Pages</h1>
+<main id="survivor-home">
+
 <section>
   <article>
-    <h2>Welcome to Admin</h2>
-  </article>
+  <h1>
+  Welcome Survivor!
+  </h1>
+</article>
 </section>
+</main>
 <?php include('../app/views/inc/admin.footer.php'); ?>
