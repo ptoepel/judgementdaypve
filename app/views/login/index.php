@@ -14,10 +14,21 @@
         ?>
       </ul>
     </div>
+    <div class="=flashSuccess">
+      <ul>
+      <?php
+        if(isset($data['flashSuccess'])){
+          foreach($data['flashSuccess'] as $success){
+            echo "<li>". $success ."</li>";
+          }
+        }
+        ?>
+      </ul>
+    </div>
 <?php } ?>
 <form class="login-form" action="<?php echo URL; ?>/public/login/userLogin" method="POST">
-        <input class="nav-item" name="email" type="email" />
-        <input class="nav-item" name="password" type="password" />
+        <label>Your Email</label><input class="nav-item" name="email" type="email" />
+        <label>Your Password</label><input class="nav-item" name="password" type="password" />
         <input class="nav-item" type="submit" name="userLogin" />
 </form>
       </main>

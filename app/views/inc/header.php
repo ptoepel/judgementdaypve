@@ -28,8 +28,11 @@
     </div>
 
     <nav class="menu">
+
       <div class="menu-branding">
-        <div class="portrait"></div>
+      <h1>Judgement Day PVE</h1>
+        <div class="portrait"><img src="http://localhost/miscreated-dmg-log-dashboard/public/css/images/Judgement-Day.jpg" /></div>
+        <p>A Miscreated Community<span></span></p>
       </div>
     	<ul class="menu-nav">
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/home/index">Home</a></li>

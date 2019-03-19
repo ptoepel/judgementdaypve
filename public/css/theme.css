@@ -1,3 +1,106 @@
+.row {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.col {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box; }
+
+/* nested grids */
+.row .row, .row.nested {
+  flex: 1 1 auto;
+  margin-top: -0.5em; }
+
+/* full width grids */
+.row.wide-fit {
+  margin-left: -10px;
+  margin-right: -10px; }
+
+/* center grids */
+.row.center {
+  justify-content: center; }
+
+.center .col {
+  flex-grow: 0;
+  flex-shrink: 0; }
+
+/* columns widths */
+.col-span-1 {
+  flex-basis: 8.3333%; }
+
+.col-span-2 {
+  flex-basis: 16.6666%; }
+
+.col-span-3 {
+  flex-basis: 25%; }
+
+.col-span-4 {
+  flex-basis: 33.3333%; }
+
+.col-span-5 {
+  flex-basis: 41.6666%; }
+
+.col-span-6 {
+  flex-basis: 50%; }
+
+.col-span-7 {
+  flex-basis: 58.3333%; }
+
+.col-span-8 {
+  flex-basis: 66.6666%; }
+
+.col-span-9 {
+  flex-basis: 75%; }
+
+.col-span-10 {
+  flex-basis: 83.3333%; }
+
+.col-span-11 {
+  flex-basis: 91.6666%; }
+
+.col-span-12 {
+  flex-basis: 100%; }
+
+/* examples */
+.fixed-width {
+  flex: 0 0 500px;
+  background-color: rgba(255, 0, 0, 0.1) !important; }
+
+@media all and (max-width: 568px) {
+  .col-span-1,
+  .col-span-2,
+  .col-span-3,
+  .col-span-4,
+  .col-span-5 {
+    flex-basis: 50%; }
+  .col-span-6,
+  .col-span-7,
+  .col-span-8,
+  .col-span-9,
+  .col-span-10,
+  .col-span-11 {
+    flex-basis: 100%; }
+  .nested .col {
+    flex-basis: 100%; } }
+
+/* eye candy */
+body {
+  font-family: sans-serif; }
+
+.row {
+  background-color: #cccccc;
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.col {
+  background-color: #999999;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-clip: content-box;
+  border: 1px solid rgba(0, 0, 0, 0.1); }
+
 * {
   box-sizing: border-box; }
 
@@ -64,8 +167,7 @@ main {
 
 form {
   background: rgba(75, 72, 41, 0.5);
-  height: 15vh;
-  width: 1fr; }
+  height: 15vh; }
 
 .menu-btn {
   position: absolute;
@@ -106,7 +208,23 @@ form {
     float: left;
     width: 50%;
     height: 100vh;
-    overflow: hidden; }
+    overflow: hidden;
+    background: #4A4729;
+    transform: translate3d(0, 100%, 0);
+    transition: all 1.5s ease-out; }
+    .menu-branding .portrait {
+      border: 0.5rem solid #3a3720;
+      border-radius: 50%; }
+    .menu-branding h1 {
+      font-size: 3rem;
+      color: #FFCB46; }
+    .menu-branding img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%; }
+    .menu-branding.show {
+      z-index: 5;
+      transform: translate3d(0, 0, 0); }
   .menu-nav {
     display: flex;
     flex-flow: column wrap;
@@ -133,13 +251,6 @@ form {
       background: url("../css/images/fire.jpg");
       border-radius: 50%;
       border: solid 3px #FFCB46; }
-  .menu.branding {
-    background: #4A4729;
-    tranform: translate3d(0, -100, 0);
-    transition: all 1.5s ease-out; }
-    .menu.branding.show {
-      z-index: 5;
-      transform: translate3d(0, 100%, 0); }
   .menu .nav-item {
     transform: translate3d(600px, 0, 0);
     transition: all 1.5s ease-out; }
@@ -213,7 +324,8 @@ footer {
   color: #fff;
   height: 60px;
   justify-content: center;
-  display: grid; }
+  display: grid;
+  align-content: center; }
 
 #contact {
   display: grid;
@@ -237,12 +349,25 @@ footer {
     grid-column-end: 7; }
   #contact h2 {
     grid-column-start: 1;
-    grid-column-end: 7; }
+    grid-column-end: 7;
+    height: 10vh; }
   #contact form {
-    grid-row-start: 3;
-    grid-row-end: 6;
-    grid-column-start: 1;
-    grid-column-end: 3; }
+    grid-column-start: 2;
+    grid-column-end: 5;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+    grid-gap: 1rem; }
+  #contact form input {
+    height: 32px;
+    grid-column-start: 2;
+    grid: column end 3; }
+  #contact form label {
+    grid-column-start: 2;
+    grid: column end 3; }
+  #contact form textarea {
+    grid-column-start: 2;
+    grid: column end 3; }
 
 .contact-us {
   position: relative; }
@@ -291,6 +416,57 @@ footer {
   z-index: -1;
   background: rgba(74, 71, 41, 0.9); }
 
+#register form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+  grid-gap: 1rem; }
+
+#register form input {
+  height: 32px;
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#register form label {
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#register form textarea {
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#register .instructions {
+  grid-column-start: 1;
+  grid-column-end: 7; }
+
+#register input[type=submit] {
+  border: 2px solid #D24D57;
+  background: white; }
+
+#register input[type=submit]::before,
+#register input[type=submit]::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1; }
+
+#register input[type=submit] {
+  overflow: hidden; }
+
+#register input[type=submit]::after {
+  /*background-color: #f00;*/
+  height: 100%;
+  left: -35%;
+  top: 0;
+  transform: skew(50deg);
+  transition-duration: 0.6s;
+  transform-origin: top left;
+  width: 0; }
+
+#register input[type=submit]:hover:after {
+  height: 100%;
+  width: 135%; }
+
 #login#login {
   background: url("http://localhost/miscreated-dmg-log-dashboard/public/css/images/squad.jpg");
   background-attachment: fixed;
@@ -305,6 +481,25 @@ footer {
   height: 100;
   z-index: -1;
   background: rgba(74, 71, 41, 0.9); }
+
+#login form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  grid-gap: 1rem; }
+
+#login form input {
+  height: 32px;
+  grid-column-start: 1;
+  grid: column end 2; }
+
+#login form label {
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#login form textarea {
+  grid-column-start: 2;
+  grid: column end 3; }
 
 #reset#reset {
   background: url("http://localhost/miscreated-dmg-log-dashboard/public/css/images/the_drive.jpg");
@@ -321,9 +516,113 @@ footer {
   z-index: -1;
   background: rgba(74, 71, 41, 0.9); }
 
+#reset form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+  grid-gap: 1rem; }
+
+#reset form input {
+  height: 32px;
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#reset form label {
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#reset form textarea {
+  grid-column-start: 2;
+  grid: column end 3; }
+
+#survivor-home {
+  /* nested grids */
+  /* full width grids */
+  /* center grids */
+  /* columns widths */
+  /* examples */
+  /* eye candy */ }
+  #survivor-home .row {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+  #survivor-home .col {
+    flex: 1 1 8%;
+    margin: 0 0 0.5rem 0;
+    padding: 0.5em 10px;
+    box-sizing: border-box; }
+  #survivor-home .row .row, #survivor-home .row.nested {
+    flex: 1 1 auto;
+    margin-top: -0.5em; }
+  #survivor-home .row.wide-fit {
+    margin-left: -10px;
+    margin-right: -10px; }
+  #survivor-home .row.center {
+    justify-content: center; }
+  #survivor-home .center .col {
+    flex-grow: 0;
+    flex-shrink: 0; }
+  #survivor-home .col-span-1 {
+    flex-basis: 8.3333%; }
+  #survivor-home .col-span-2 {
+    flex-basis: 16.6666%; }
+  #survivor-home .col-span-3 {
+    flex-basis: 25%; }
+  #survivor-home .col-span-4 {
+    flex-basis: 33.3333%; }
+  #survivor-home .col-span-5 {
+    flex-basis: 41.6666%; }
+  #survivor-home .col-span-6 {
+    flex-basis: 50%; }
+  #survivor-home .col-span-7 {
+    flex-basis: 58.3333%; }
+  #survivor-home .col-span-8 {
+    flex-basis: 66.6666%; }
+  #survivor-home .col-span-9 {
+    flex-basis: 75%; }
+  #survivor-home .col-span-10 {
+    flex-basis: 83.3333%; }
+  #survivor-home .col-span-11 {
+    flex-basis: 91.6666%; }
+  #survivor-home .col-span-12 {
+    flex-basis: 100%; }
+  #survivor-home .fixed-width {
+    flex: 0 0 500px;
+    background-color: rgba(255, 0, 0, 0.1) !important; }
+  @media all and (max-width: 568px) {
+    #survivor-home .col-span-1,
+    #survivor-home .col-span-2,
+    #survivor-home .col-span-3,
+    #survivor-home .col-span-4,
+    #survivor-home .col-span-5 {
+      flex-basis: 50%; }
+    #survivor-home .col-span-6,
+    #survivor-home .col-span-7,
+    #survivor-home .col-span-8,
+    #survivor-home .col-span-9,
+    #survivor-home .col-span-10,
+    #survivor-home .col-span-11 {
+      flex-basis: 100%; }
+    #survivor-home .nested .col {
+      flex-basis: 100%; } }
+  #survivor-home body {
+    font-family: sans-serif; }
+  #survivor-home .row {
+    background-color: #cccccc;
+    background-color: rgba(0, 0, 0, 0.1); }
+  #survivor-home .col {
+    background-color: #999999;
+    background-color: rgba(0, 0, 0, 0.2);
+    background-clip: content-box;
+    border: 1px solid rgba(0, 0, 0, 0.1); }
+
 @media screen and (max-width: 500px) {
   main#home h1 {
-    margin-top: 10vh; } }
+    margin-top: 10vh; }
+  main#about {
+    display: grid;
+    grid-template-columns: 1 1fr; } }
 
 @media screen and (max-width: 768px) {
   main {

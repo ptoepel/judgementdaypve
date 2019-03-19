@@ -9,10 +9,10 @@ Contact
     Have a question for us?
 </h2>
 <form class="contact-us" action="<?php echo URL; ?>/public/contact/contactUs">
-<input name="name" type="string">
-<input name="email" type="email">
-<input name="subject" type="string">
-<textarea name="content"></textarea>
+<label>Your Name</label><input name="name" type="string">
+<label>Your Email</label><input name="email" type="email">
+<label>The Subject</label><input name="subject" type="string">
+<label>The Detail</label><textarea name="content"></textarea>
 <input type="submit" name="contactUs"/>
    
 </form>
