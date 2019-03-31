@@ -40,15 +40,6 @@ class User
   }
 
 
-  function setUserName(){
-
-	}
-
-
-
-	function getUserName(){
-
-	}
 
 
 
@@ -59,36 +50,31 @@ class User
     $num_rows = count($result);
     
     if($num_rows == 0 || empty($num_rows)){
-      $flashErr[] = "no such email";
+      $flashMessage['error'] = "no such email";
     }else{
       password_verify($password,$result[0]['password']);
       if(password_verify($password,$result[0]['password']) == 1){
-        /*
-          SESSION SET REWORK
-        */
 
-        $_SESSION['userName'] = $result[0]['userName'];
-        $_SESSION['isActive'] = 1;
-
+           $flashMessage['success'] = "Message posted";
 
       }else{
 
-        $flashErr[] = "passwords do not match";
+        $flashMessage['error'] = "passwords do not match";
 
       }
 
     }
 
-      if (isset($flashErr)) {
+      if (isset($flashMessage['error'])) {
           $val = array(
-            'flashErr' =>$flashErr,
+            'flashErr' =>$flashMessage['error'],
             'checkVal' =>false
           );
 
         return $val;  // code...
       }else{
         $val = array(
-          'checkVal' =>true
+          'checkVal' =>$flashMessage['success']
         );
         return $val;
       }

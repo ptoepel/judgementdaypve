@@ -5,6 +5,7 @@ class Login extends Controller
 {
 
 	public function __construct(){
+		Session::init();
 		$this->user = $this->model('User');
 
 	}
@@ -138,8 +139,8 @@ class Login extends Controller
 
   		$checkValue = $this->user->userLogin($this->email,$this->password);
 
-  		if($checkValue['checkVal'] == true){
-				Session::init();
+  		if(isset($checkValue['checkVal']) == true){
+	
 				Session::set('email',$this->email);
   			$this->view('survivor/index');
   		}else{

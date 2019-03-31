@@ -4,7 +4,7 @@
 	
 <div class="grid">
   <div class="grid__item grid__item--md-span-4">
-    xs-4
+  <?php echo $_SESSION['email']; ?>
   </div>
   <div class="grid__item grid__item--md-span-4">
     xs-4
