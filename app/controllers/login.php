@@ -139,6 +139,8 @@ class Login extends Controller
   		$checkValue = $this->user->userLogin($this->email,$this->password);
 
   		if($checkValue['checkVal'] == true){
+				Session::init();
+				Session::set('email',$this->email);
   			$this->view('survivor/index');
   		}else{
           $this->view('login/index',['flashErr' => $checkValue['flashErr']] );
@@ -220,7 +222,8 @@ public function userResetEmail(){
   }
 } // userResetEmail
 public function logout(){
-  
+	$this->view('home/index');
+	Session::destroy();
 } // Logout
 
 

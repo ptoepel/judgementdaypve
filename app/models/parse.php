@@ -1,11 +1,12 @@
 <?php
 
-class Parse {
+Class Parse 
+{
 	private $cells;
-	public $table;
+	private $table;
 	
-	$cells = getFile();
-	if($cells != null){
+	//$cells = getFile();
+	if($this->cells != null ){
 		$table = "<table id='myTable'>";
 		$table .="<tr>";
 		foreach($cells as $key => $row){		
@@ -32,7 +33,7 @@ class Parse {
 		$table .="</table>";
 	}
 	
-	
-return $table;
+
+
 
 }

@@ -3,6 +3,9 @@
 <head>
 <title>Miscreated Damage Logs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+
+
 
 <?php if($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] == "localhost/miscreated-dmg-log-dashboard/public/report/index"){    ?>
 
@@ -57,31 +60,38 @@ $(document).ready(function() {
 <nav>
   <ul>
     
-    <li><a href="#">Home</a></li>
+    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
     <li>
-        <a href="#">About</a>
+        <a href="#"><i class="fas fa-address-card"></i> About</a>
         <ul>
-            <li><a href="#">Survivors</a></li>
-            <li><a href="#">Discord</a></li>
-            <li><a href="#">Admins</a></li>
-            <li><a href="#">Bases</a></li>
-            <li><a href="#">Rules</a></li>
-            <li><a href="#">Story</a></li>
-            <li><a href="#">Factions</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i> Survivors</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Admins</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Bases</a></li>
+            <li><a href="#"><i class="fas fa-ruler-vertical"></i> Rules</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Story</a></li>
+            <li><a href="#"><i class="fas fa-user-friends"></i> Factions</a></li>
         </ul>
     </li>
-    <li><a href="#">Blog</a></li>
-    <li><a href="#">Data</a>
+    <li><a href="#"><i class="fas fa-newspaper"></i> Blog</a></li>
+    <li><a href="#"><i class="fas fa-user-friends"></i> Data</a>
     <ul>
-            <li><a href="#">Top 5</a></li>
-            <li><a href="#">Raw Data</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="#"><i class="fab fa-500px"></i> Top 5</a></li>
+            <li><a href="#"><i class="fas fa-scroll"></i>Raw Data</a></li>
+            <li><a href="#"><i class="fas fa-id-badge"></i>Profile</a></li>
             <li><a href="#">Archived</a></li>
         </ul></li>
-    <li><a href="#">Social</a></li>
-    <li><a href="#">Messages</a></li>
+    <li><a href="#"><i class="fas fa-share"></i>Social</a></li>
+    <li><a href="#"><i class="fas fa-share"></i> Messages</a></li>
   </ul>
+  <div style="float:right;">
+  <ul>
+  <li><a href="<?php print URL . '/public/login/logout'; ?>"><i class="fas fa-contact"></i> Logout</a></li>
+  </ul>
+  </ul>
+  </div>
   <div style="clear:both;"></div>
+
 </nav>
   </header>
 <div class="container">

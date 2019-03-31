@@ -3,18 +3,16 @@
 
 	
 <div class="grid">
-  <div class="grid__item grid__item--xs-span-1">
-    xs-1
+  <div class="grid__item grid__item--md-span-4">
+    xs-4
   </div>
-  <div class="grid__item grid__item--xs-span-2">
-    xs-2
+  <div class="grid__item grid__item--md-span-4">
+    xs-4
   </div>
-  <div class="grid__item grid__item--xs-span-3">
-    xs-3
+  <div class="grid__item grid__item--md-span-4">
+    xs-4
   </div>
-  <div class="grid__item grid__item--xs-span-6">
-    xs-6
-  </div>
+
 </div>
 
 <div class="grid">
@@ -22,7 +20,12 @@
     md-4
   </div>
   <div class="grid__item grid__item--md-span-4">
-    md-4
+  <form class="home-post" action="<?php echo URL; ?>/public/survivor/post" method="POST">
+    <textarea name="postBody" style=" width: 300px;
+  height: 100px;"></textarea>
+  
+    <button type="submit" value="postHomePage"><i class="fas fa-paper-plane"></i> POST</button>
+    </form>
   </div>
   <div class="grid__item grid__item--md-span-4">
     md-4

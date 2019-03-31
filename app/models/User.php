@@ -33,7 +33,11 @@ class User
    	Database::query('SELECT userName,password,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
 	}
 
+  function getUserIDByEmail($email){
+    $this->email = $email;
+    Database::query('SELECT userName,password,email,steamID FROM users WHERE email=:email', array(':email'=>$this->email));
 
+  }
 
 
   function setUserName(){

@@ -10,6 +10,7 @@
   </div>
   <div>
   </div>
+  <script src="<?php echo URL; ?>/public/js/jquery.js"></script>
 
   <script>
 
@@ -50,6 +51,15 @@ if(menuBtn){
 
 
 </script>
+
+<script src="<?php print URL; ?>/public/js/home.js"></script>
+<script src="<?php print URL; ?>/public/js/about.js"></script>
+<script src="<?php print URL; ?>/public/js/contact.js"></script>
+<script src="<?php print URL; ?>/public/js/register.js"></script>
+<script src="<?php print URL; ?>/public/js/login.js"></script>
+<script src="<?php print URL; ?>/public/js/h.js"></script>
+<script src="<?php print URL; ?>/public/js/home.js"></script>
+<script src="<?php print URL; ?>/public/js/home.js"></script>
 </footer>
 </body>
 </html>

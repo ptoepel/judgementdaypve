@@ -11,6 +11,6 @@ class Functions{
     return $link;
   }
 
-
+  
 
 }

@@ -3,6 +3,7 @@
 <head>
 <title>Miscreated Damage Logs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
 
 <?php if($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] == "localhost/miscreated-dmg-log-dashboard/public/report/index"){    ?>
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
@@ -10,9 +11,9 @@
   <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>/public/css/styles.css">
   <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>/public/css/theme.css">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
 <?php } ?>
 
-<script src="<?php echo URL; ?>/public/js/jquery.js"></script>
 
 
 
