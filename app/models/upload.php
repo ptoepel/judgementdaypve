@@ -1,19 +1,12 @@
 <?php
 
-class Upload() {
+class Upload{
 	private $cells;
-	public $table;
-	
-	function constructor(){
-		
-	}
-	
-	function upload(){
-		
-	}
-	
+	private $table;
 
+	public function __construct()
+	{
 
-return $table;
+  	}
 
 }

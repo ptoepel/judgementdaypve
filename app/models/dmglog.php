@@ -2,25 +2,25 @@
 
 Class Dmglog {
 
-$dateCreated;
-$damageType; 
-$shooterSteamID;
-public var string $shooterName;
-public var string $shooterFaction; 
-public var string $shooterPos;
-public var int $targetSteamID;
-public var string $IDtargetName; 
-public var string $targetFaction; 
-public var string $targetPos;
-public var string $weapon; 
-public var string $distance; 
-public var string $damage; 
-public var string $melee; 
-public var string $headshot; 
-public var string $kill; 
-public var string $part; 
-public var string $hitType; 
-public var string $projectile; 
+private $dateCreated;
+private $damageType; 
+private $shooterSteamID;
+private $shooterName;
+private $shooterFaction; 
+private $shooterPos;
+private $targetSteamID;
+private $IDtargetName; 
+private $targetFaction; 
+private $targetPos;
+private $weapon; 
+private $distance; 
+private $damage; 
+private $melee; 
+private $headshot; 
+private $kill; 
+private $part; 
+private $hitType; 
+private $projectile; 
 
 
 
@@ -29,22 +29,28 @@ public var string $projectile;
               $db = new DB();
 	}
 	
-	public setID($id){
+	function setID(int $id){
 		$this->ID = $id;
 		$sql = "INSERT VALUE(ID) INTO DmgLog WHERE ID=" . $this->ID ."";
-
+		unset($this->ID);
+	    $result =  DB::query($sql);
+		return $result;
 	}
 
-	public getDateCreated($id){
+	function getDateCreated(int $id){
 		$this->ID = $id;
 		$sql = "SELECT DateCreated FROM DmgLog WHERE ID=" . $this->ID ."";
+		$result =  DB::query($sql);
+		return $result;
 	}
 
 
 	public function setDateCreated($dateCreated){
 		$this->dateCreated = $dateCreated;
 		$sql = "INSERT VALUE(DateCreated) INTO DmgLog WHERE ID=" . $this->dateCreated; ."";
-
+		$result =  DB::query($sql);
+		return $result;
+	
 	}
 
 	public function getDateCreated(){

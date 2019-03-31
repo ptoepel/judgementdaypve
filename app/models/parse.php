@@ -1,21 +1,8 @@
 <?php
 
-class Parse() {
+class Parse {
 	private $cells;
 	public $table;
-	
-	function constructor(){
-		
-	}
-	
-	function upload(){
-		
-	}
-	
-	function parse(){
-		
-	}
-	
 	
 	$cells = getFile();
 	if($cells != null){
