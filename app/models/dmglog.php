@@ -2,31 +2,25 @@
 
 Class Dmglog {
 
-
-	_constructor(){
-	}
-
-
-private var ID;
-public var date dateCreated;
-public var string damageType; 
-public var int shooterSteamID;
-public var string shooterName;
-public var string shooterFaction; 
-public var string shooterPos;
-public var int targetSteamID;
-public var string targetName; 
-public var string targetFaction; 
-public var string targetPos;
-public var string weapon; 
-public var string distance; 
-public var string damage; 
-public var string melee; 
-public var string headshot; 
-public var string kill; 
-public var string part; 
-public var string hitType; 
-public var string projectile; 
+$dateCreated;
+$damageType; 
+$shooterSteamID;
+public var string $shooterName;
+public var string $shooterFaction; 
+public var string $shooterPos;
+public var int $targetSteamID;
+public var string $IDtargetName; 
+public var string $targetFaction; 
+public var string $targetPos;
+public var string $weapon; 
+public var string $distance; 
+public var string $damage; 
+public var string $melee; 
+public var string $headshot; 
+public var string $kill; 
+public var string $part; 
+public var string $hitType; 
+public var string $projectile; 
 
 
 

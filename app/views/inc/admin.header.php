@@ -57,26 +57,29 @@ $(document).ready(function() {
 <nav>
   <ul>
     
-    <li><a href="#">Link 1</a></li>
+    <li><a href="#">Home</a></li>
     <li>
-        <a href="#">Link 2</a>
+        <a href="#">About</a>
         <ul>
-            <li><a href="#">Sublink 1</a></li>
-            <li><a href="#">Sublink 2</a></li>
-            <li><a href="#">Sublink 3</a></li>
-            <li><a href="#">Sublink 4</a></li>
+            <li><a href="#">Survivors</a></li>
+            <li><a href="#">Discord</a></li>
+            <li><a href="#">Admins</a></li>
+            <li><a href="#">Bases</a></li>
+            <li><a href="#">Rules</a></li>
+            <li><a href="#">Story</a></li>
+            <li><a href="#">Factions</a></li>
         </ul>
     </li>
-    <li><a href="#">Link 3</a></li>
-    <li><a href="#">Link 4</a>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Data</a>
     <ul>
-            <li><a href="#">Sublink 1</a></li>
-            <li><a href="#">Sublink 2</a></li>
-            <li><a href="#">Sublink 3</a></li>
-            <li><a href="#">Sublink 4</a></li>
+            <li><a href="#">Top 5</a></li>
+            <li><a href="#">Raw Data</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Archived</a></li>
         </ul></li>
-    <li><a href="#">Link 5</a></li>
-    <li><a href="#">Link 6</a></li>
+    <li><a href="#">Social</a></li>
+    <li><a href="#">Messages</a></li>
   </ul>
   <div style="clear:both;"></div>
 </nav>
