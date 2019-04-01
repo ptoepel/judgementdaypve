@@ -7,7 +7,7 @@ class Login extends Controller
 	public function __construct(){
 		Session::init();
 		$this->user = $this->model('User');
-
+		$this->post = $this->model('Post');
 	}
 
 
@@ -142,7 +142,9 @@ class Login extends Controller
   		if(isset($checkValue['checkVal']) == true){
 	
 				Session::set('email',$this->email);
-  			$this->view('survivor/index');
+				$addedByID =	$this->user->getUserIDByEmail($this->email);
+				$userPosts = $this->post->allPostsByUser($addedByID);
+  			$this->view('survivor/index',['data'=>$userPosts] );
   		}else{
           $this->view('login/index',['flashErr' => $checkValue['flashErr']] );
 
@@ -223,8 +225,8 @@ public function userResetEmail(){
   }
 } // userResetEmail
 public function logout(){
-	$this->view('home/index');
 	Session::destroy();
+	$this->view('home/index');
 } // Logout
 
 

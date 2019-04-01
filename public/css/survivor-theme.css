@@ -276,6 +276,23 @@ footer {
   font-size: 8rem;
   animation: filling 3s ease forwards; }
 
+.post {
+  margin: 1rem 0;
+  border: 1px solid gold;
+  height: 6rem; }
+
+.post-body {
+  display: block;
+  height: 100%;
+  width: 100%; }
+
+.home-post button {
+  height: 28px;
+  width: 100%;
+  background: #FFCB46;
+  color: white;
+  font-weight: bold; }
+
 #register#register {
   background: url("http://localhost/miscreated-dmg-log-dashboard/public/css/images/the_cross.jpg");
   background-attachment: fixed;
@@ -497,10 +514,6 @@ MOBILE NAV STYLES
 
 .grid__item {
   padding: 0.5rem; }
-  .grid__item:nth-child(even) {
-    background-color: #eee; }
-  .grid__item:nth-child(odd) {
-    background-color: #ddd; }
 
 .grid__item--xs-span-1 {
   flex: 0 0 100%; }

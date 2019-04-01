@@ -336,6 +336,30 @@ footer{
     animation: filling 3s ease forwards;
   }
 
+.post{
+  margin:1rem 0;
+  border:1px solid gold;
+  height:6rem;
+}
+
+.post-body{
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.post-text-body{
+
+}
+
+
+.home-post button{
+  height: 28px;
+  width: 100%;
+  background: #FFCB46;
+  color: white;
+  font-weight: bold;
+}
 
 
 #register{
@@ -610,11 +634,11 @@ $items: 12;
   padding: 0.5rem;
   
   &:nth-child(even) {
-    background-color: #eee;
+   
   }
   
   &:nth-child(odd) {
-    background-color: #ddd;
+
   }
 }
 

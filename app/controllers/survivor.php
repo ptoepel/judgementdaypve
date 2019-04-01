@@ -14,12 +14,10 @@ class Survivor extends Controller{
 
 
 		if(isset($_SESSION)){
-print_r($_SESSION);
-		$this->email = Session::get('email');
-		$this->view('survivor/index');
+
+
 
 		}else{
-			print_r($_SESSION);
 			$this->view('login/index');
 		}
 		
@@ -27,12 +25,20 @@ print_r($_SESSION);
 	}
 
   public function index()
-	{
-		$this->view('survivor/index');
+	{ 
+		$email = Session::get('email');
+		$this->email = $email;
+
+		$userID = $this->user->getUserIDByEmail($this->email);
+		$userPosts = $this->post->allPostsByUser($userID);
+		$this->view('survivor/index',['data' => $userPosts]);
 	}
 
 	public function post(){
+
+
 		if(isset($_POST['postHomePage'])){
+
 			$email = Session::get('email');
 			$this->email = $email;
 			$body =	strip_tags($_POST['postBody']);
@@ -40,23 +46,25 @@ print_r($_SESSION);
 			if($check_empty !=""){
 				$body_array = preg_split('/\s+/',$body);
 				$body = implode(" ",$body_array);
-				$date_added = date("Y-m-d H:i:s");
+				$dateAdded = date("Y-m-d H:i:s");
+
+
 				$addedByID = $this->user->getUserIDByEmail($this->email);
-
-				if($user_to == $added_by){
-					$user_to ="none";
+				$userToID = null;
+				if($userToID == $addedByID){
+					$userToID = 0;
 				}
+				$userToID = 0;
+				$userClosed = date("Y-m-d H:i:s");
+				$deleted = "yes";
+				$likes = "0";
+				$image = "";
+				$dislikes = "0";
 
-				$insertCheck = $this->post->insert($body,$addedByID,$userToID,$dateAdded,$userClosed,$deleted,$likes,$image,$dislikes);
-
-				if($insertCheck != true){
-						$this->view('survivor/index', ['flashErr' => $checkValue['flashErr']]);
-
-				}else{
-					$this->view('survivor/index',['successBlock' => $checkValue['successBlock']]);
-				}
-
-
+				$this->post->insert($body,$addedByID,$userToID,$dateAdded,$userClosed,$deleted,$likes,$image,$dislikes);
+				$flashMessage['successBlock'] = "Post Successful";
+				$userPosts = $this->post->allPostsByUser($addedByID);
+						$this->view('survivor/index', ['flashErr' => $flashMessage['successBlock'],'data' => $userPosts]);
 			}
 		}
 	}

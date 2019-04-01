@@ -34,9 +34,12 @@ class User
 	}
 
   function getUserIDByEmail($email){
-    $this->email = $email;
-    Database::query('SELECT userName,password,email,steamID FROM users WHERE email=:email', array(':email'=>$this->email));
 
+    $this->email = $email;
+    $result = Database::query('SELECT id FROM users WHERE email=:email', array(':email'=>$email));
+
+    
+    return $result[0]['id'];
   }
 
 
