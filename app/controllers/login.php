@@ -8,6 +8,7 @@ class Login extends Controller
 		Session::init();
 		$this->user = $this->model('User');
 		$this->post = $this->model('Post');
+		$this->comment = $this->model('Comment');
 	}
 
 

@@ -34,6 +34,13 @@ class User
     return $result;
   }
 
+
+  function getprofileByID($id){
+		$this->id = $id;
+   	$result = Database::query('SELECT * FROM users WHERE id=:id', array(':id'=>$this->id));
+    return $result;
+  }
+
   function getUserIDByEmail($email){
 
     $this->email = $email;

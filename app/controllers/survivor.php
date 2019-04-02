@@ -11,6 +11,7 @@ class Survivor extends Controller{
 		$this->user = $this->model('User');
 		$this->post = $this->model('Post');
 		$this->single = $this->model('Single');
+		$this->comment = $this->model('comment');
 		
 
 
@@ -82,16 +83,18 @@ class Survivor extends Controller{
 		}
 	}
 
-	public function comment($postID){
+	public function comment(){
 
 
-		if(isset($_POST['postComment'])){
+
 
 			$email = Session::get('email');
 			$this->email = $email;
 			$userID = $this->user->getUserIDByEmail($this->email);
+			$this->comment->insert($_POST);
+			$this->view('survivor/index');
 			
-		}
+		
 	}
 
 
@@ -134,7 +137,12 @@ class Survivor extends Controller{
 
 	public function profile()
 	{ 
-		$profile = $this->user->getProfileByID();
+
+		$email = Session::get('email');
+		$this->email = $email;
+		
+		$userID = $this->user->getUserIDByEmail($this->email);
+		$profile = $this->user->getProfileByID($userID);
 
 
 		$this->view('survivor/profile',['data' => $profile]);
