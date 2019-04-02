@@ -36,10 +36,20 @@ Class Post{
 
     function allPostsByUser($userID){
 
-      $result =  Database::query('SELECT * FROM posts WHERE added_by=:id', array(':id'=> $userID));
+      $result =  Database::query('SELECT * FROM posts WHERE added_by=:id ORDER BY date_added DESC', array(':id'=> $userID));
    
       return $result;
     }
+
+
+    function getRecentPosts(){
+
+      $result =  Database::query('SELECT * FROM posts ORDER BY date_added DESC');
+   
+      return $result;
+    }
+
+
 
 
 }

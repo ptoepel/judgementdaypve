@@ -60,29 +60,28 @@ $(document).ready(function() {
 <nav>
   <ul>
     
-    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="<?php echo URL; ?>/public/survivor/index"><i class="fas fa-home"></i> Home</a></li>
     <li>
-        <a href="#"><i class="fas fa-address-card"></i> About</a>
+        <a href="<?php echo URL; ?>/public/survivor/about"><i class="fas fa-address-card"></i> About</a>
         <ul>
-            <li><a href="#"><i class="fas fa-address-card"></i> Survivors</a></li>
-            <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
-            <li><a href="#"><i class="fab fa-discord"></i> Admins</a></li>
-            <li><a href="#"><i class="fab fa-discord"></i> Bases</a></li>
-            <li><a href="#"><i class="fas fa-ruler-vertical"></i> Rules</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Story</a></li>
-            <li><a href="#"><i class="fas fa-user-friends"></i> Factions</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/users"><i class="fas fa-address-card"></i> Survivors</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/discord"><i class="fab fa-discord"></i> Discord</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/staff"><i class="fab fa-discord"></i>Staff</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/bases"><i class="fab fa-discord"></i> Bases</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/Rules"><i class="fas fa-ruler-vertical"></i> Rules</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/story"><i class="fas fa-book"></i> Story</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/factions"><i class="fas fa-user-friends"></i> Factions</a></li>
         </ul>
     </li>
-    <li><a href="#"><i class="fas fa-newspaper"></i> Blog</a></li>
-    <li><a href="#"><i class="fas fa-user-friends"></i> Data</a>
+    <li><a href="<?php echo URL; ?>/public/survivor/blog"><i class="fas fa-newspaper"></i> Blog</a></li>
+    <li><a href="<?php echo URL; ?>/public/survivor/data"><i class="fas fa-user-friends"></i> Data</a>
     <ul>
-            <li><a href="#"><i class="fab fa-500px"></i> Top 5</a></li>
-            <li><a href="#"><i class="fas fa-scroll"></i>Raw Data</a></li>
-            <li><a href="#"><i class="fas fa-id-badge"></i>Profile</a></li>
-            <li><a href="#">Archived</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/topfive"><i class="fab fa-500px"></i> Top 5</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/raw"><i class="fas fa-scroll"></i>Raw Data</a></li>
+            <li><a href="<?php echo URL; ?>/public/survivor/archived">Archived</a></li>
         </ul></li>
-    <li><a href="#"><i class="fas fa-share"></i>Social</a></li>
-    <li><a href="#"><i class="fas fa-share"></i> Messages</a></li>
+    <li><a href="<?php echo URL; ?>/public/survivor/social"><i class="fas fa-share"></i>Social</a></li>
+    <li><a href="<?php echo URL; ?>/public/survivor/messages"><i class="fas fa-share"></i> Messages</a></li>
   </ul>
   <div style="float:right;">
   <ul>

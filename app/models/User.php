@@ -28,10 +28,11 @@ class User
 
 
 
-  function getUserID($id){
+  function getUserByID($id){
 		$this->id = $id;
-   	Database::query('SELECT userName,password,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
-	}
+   	$result = Database::query('SELECT userName,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
+    return $result;
+  }
 
   function getUserIDByEmail($email){
 
@@ -42,6 +43,11 @@ class User
     return $result[0]['id'];
   }
 
+  function getAllUsers(){
+    $result = Database::query('SELECT id,userName FROM users');
+    return $result;
+
+  }
 
 
 
