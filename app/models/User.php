@@ -35,18 +35,39 @@ class User
   }
 
 
-  function getprofileByID($id){
+  function getProfileByID($id){
 		$this->id = $id;
    	$result = Database::query('SELECT * FROM users WHERE id=:id', array(':id'=>$this->id));
     return $result;
   }
 
+  function getProfilePicByID($userID){
+    $result = Database::query('SELECT profileImage FROM users WHERE id=:id', array(':id'=>$userID));
+    return $result;
+  }
+
+  function getUserNameByID($userID){
+    $result = Database::query('SELECT userName FROM users WHERE id=:id', array(':id'=>$userID));
+    return $result;
+  }
+
+  function updateProfileByID($id,$val){
+    $this->id = $id;
+    $this->userName = $val['userName'];
+    $this->email = $val['email'];
+    $this->country = $val['country'];
+    $this->website = $val['website'];
+    $this->fileToUpload = $val['fileToUpload'];
+      Database::query('UPDATE users SET userName=:userName, email=:email,country=:country,website=:website,profileImage=:profileImage WHERE id=:id',array(':id' => $this->id,':userName' => $this->userName,':email' =>$this->email,':country'=> $this->country,':website' => $this->website,':profileImage'=> $this->fileToUpload));
+    }
+  
+
+
   function getUserIDByEmail($email){
 
-    $this->email = $email;
     $result = Database::query('SELECT id FROM users WHERE email=:email', array(':email'=>$email));
 
-    
+
     return $result[0]['id'];
   }
 

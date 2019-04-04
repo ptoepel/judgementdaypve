@@ -9,6 +9,7 @@ class Login extends Controller
 		$this->user = $this->model('User');
 		$this->post = $this->model('Post');
 		$this->comment = $this->model('Comment');
+		
 	}
 
 
@@ -145,7 +146,44 @@ class Login extends Controller
 				Session::set('email',$this->email);
 				$addedByID =	$this->user->getUserIDByEmail($this->email);
 				$userPosts = $this->post->allPostsByUser($addedByID);
-  			$this->view('survivor/index',['data'=>$userPosts] );
+				$profile = $this->user->getProfileByID($addedByID);
+
+		
+		
+						for($i = 0; $i < count($userPosts);$i++){
+						$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
+						$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
+		
+						array_push($userPosts[$i],$profile,$userName);
+		
+						$userPosts[$i]['comments'] = $this->comment->getAllCommentsForPostID($userPosts[$i]['id']);
+		
+						if(isset($userPosts[$i]['comments'])){
+							if(count($userPosts[$i]['comments']) > 0){
+								for($c = 0; $c < count($userPosts[$i]['comments']);$c++){
+									$commentProfile = $this->user->getProfilePicByID($userPosts[$i]['comments'][$c]['posted_by']);
+									$commentUserName = $this->user->getUserNameByID($userPosts[$i]['comments'][$c]['posted_by']);
+							
+									array_push($userPosts[$i]['comments'][$c],$commentProfile,$commentUserName);
+								}
+							}
+		
+						}
+		
+		
+		
+					}
+					
+		
+
+
+
+
+		
+		
+				
+
+  			$this->view('survivor/index',['data'=>$userPosts, 'userProfile' => $profile] );
   		}else{
           $this->view('login/index',['flashErr' => $checkValue['flashErr']] );
 

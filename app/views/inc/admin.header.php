@@ -74,12 +74,23 @@ $(document).ready(function() {
             <li><a href="<?php echo URL; ?>/public/survivor/factions"><i class="fas fa-user-friends"></i> Factions</a></li>
         </ul>
     </li>
-    <li><a href="<?php echo URL; ?>/public/survivor/blog"><i class="fas fa-newspaper"></i> Blog</a></li>
+    <?php /* DELETE THIS */ $classType = 1; ?>
+
+    <li>
+    <a href="<?php echo URL; ?>/public/survivor/blog"><i class="fas fa-newspaper"></i> Blog</a><?php if($classType != 1){ echo "</li>";} ?>
+
+    <?php if($classType == 1){ ?>
+    <ul>
+      <li><a href="<?php echo URL; ?>/public/survivor/create_blog">Create Blog Post</a></li>
+    </ul>
+    <?php if($classType == 1){ echo "</li>";} ?>
+    <?php } ?>
     <li><a href="<?php echo URL; ?>/public/survivor/data"><i class="fas fa-user-friends"></i> Data</a>
     <ul>
             <li><a href="<?php echo URL; ?>/public/survivor/topfive"><i class="fab fa-500px"></i> Top 5</a></li>
             <li><a href="<?php echo URL; ?>/public/survivor/raw"><i class="fas fa-scroll"></i>Raw Data</a></li>
             <li><a href="<?php echo URL; ?>/public/survivor/archived">Archived</a></li>
+    <?php if($classType == 1){ ?><li><a href="<?php echo URL; ?>/public/survivor/upload_damage_logs">Upload Damage Log</a></li><?php } ?>
         </ul></li>
     <li><a href="<?php echo URL; ?>/public/survivor/social"><i class="fas fa-share"></i>Social</a></li>
     <li><a href="<?php echo URL; ?>/public/survivor/messages"><i class="fas fa-share"></i> Messages</a></li>

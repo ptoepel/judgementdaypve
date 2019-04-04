@@ -17,7 +17,7 @@
 
 <div class="grid">
   <div class="grid__item grid__item--md-span-4">
-   
+
   </div>
   <div class="grid__item grid__item--md-span-4">
   <h2>Profile</h2>
@@ -44,7 +44,8 @@
         echo  $user['country'];
         echo "</div>";
         echo "</div>";
-  
+
+    
     }
 
 
@@ -61,7 +62,22 @@
   </div>
   <div class="grid__item grid__item--md-span-4">
 
+  <form action="<?php echo URL; ?>/public/survivor/upload_profile" method="POST" enctype="multipart/form-data">
 
+        Select image to upload:
+
+        <label>Username</label>
+        <input type="text" name="userName">
+        <label>Email</label>
+        <input type="text" name="email">
+        <label>Country</label>
+        <input type="text" name="country">
+        <label>Website</label>
+        <input type="text" name="website">
+        <p>Upload Your Profile Image:</p>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="profile_upload">
+    </form>
   </div>
   <div class="grid__item grid__item--md-span-4">
 
