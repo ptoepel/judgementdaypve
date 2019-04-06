@@ -105,4 +105,6 @@ $(document).ready(function() {
 
 </nav>
   </header>
+
 <div class="container">
+<div class="pop-up-box"></div>

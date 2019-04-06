@@ -43,10 +43,10 @@
     <textarea class="post-body" name="postBody" ></textarea>
     <ul>
       <!-- GOT TO GET THIS WORKING -->
-      <li><a href="/image/upload"><i class="fas fa-images"></i>Pics</a></li>
-      <li><a href="/image/upload"><i class="fab fa-youtube"></i>Youtube</a></li>
-      <li><a href="/image/upload"><i class="fas fa-link"></i>Link</a></li>
-      <li><a href="/image/upload"><i class="fas fa-share-alt"></i>Tag</a></li>
+      <li><a class="photo-upload" href="/image/upload"><i class="fas fa-images"></i>Pics</a></li>
+      <li><a class="youtube-upload" href="/image/upload"><i class="fab fa-youtube"></i>Youtube</a></li>
+      <li><a class="link-upload"  href="/image/upload"><i class="fas fa-link"></i>Link</a></li>
+      <li><a class="share-upload" href="/image/upload"><i class="fas fa-share-alt"></i>Tag</a></li>
     </ul>
     <button class="post-button" type="submit" name="postHomePage"><i class="fas fa-paper-plane"></i> POST</button>
 
@@ -139,8 +139,23 @@
     </article>
   </div>
   <div class="grid__item grid__item--md-span-4">
-    <h2>Who To Follow:</h2>
+  <div class="who-to-follow">
+    <h3>Who To Follow:</h3>
+  </div>
   </div>
 </div>
 </main>
+<div class="grid">
+  <div class="grid__item grid__item--md-span-12">
+    <div class="pop-container">
+      <div class="close-pop-up-container">
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+      </div>
+    <h3>Upload Photo</h3>
+    <input type="upload" name="post_photo_upload" />
+    </div>
+  </div>
+</div>
+
 <?php include('../app/views/inc/admin.footer.php'); ?>

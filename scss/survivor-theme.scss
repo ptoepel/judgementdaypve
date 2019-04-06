@@ -377,6 +377,10 @@ background:rgba(0,0,0,0.5);
   }
 }
 
+.who-to-follow{
+  background:rgba(0, 0, 0, 0.5)
+}
+
 .post-body{
   display: block;
   height: 5rem;
@@ -407,7 +411,55 @@ background:rgba(0,0,0,0.5);
 position:relative;
 }
 
+.overlay{
+  background:rgba(0,0,0,0.9);
+  margin: 0 auto;
+  height:100%;
+  width:100%;
+  transition:5s;
+  z-index:10;
+  position:absolute;
+}
+.pop-container{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 5s, opacity 5s linear;
+ 
+ 
+}
+.pop-up-container{
+  top:15%;
+  right:auto;
+  height:400px;
+  width:400px;
+  right:40%;
+  background:linear-gradient(to bottom, rgba(75, 72, 41, 0.5) 0%, rgba(52, 50, 28, 0.5) 100%);
+  position:fixed;
+  z-index:11;
+  visibility: visible;
+  opacity: 1;
+  padding: 4rem;
+  transition:visibility 5s, opacity 5s linear;
+}
+.close-pop-up-container{
+  position:absolute;
+  z-index:11;
+  top:0;
+  right:0;
+  height:3px;
+  width:20px;
+  .btn-line{
+    border:1px solid white;
+  
+  }
 
+}
+.close-pop-up-container:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.close-pop-up-container:nth-child(2) {
+  transform:rotate(-45deg) translate(7px, -6px);
+}
 .home-post button{
   padding:0.7rem 0;
   width: 100%;

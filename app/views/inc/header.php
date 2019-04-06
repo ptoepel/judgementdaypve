@@ -43,9 +43,6 @@
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/index">Login</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/register">Register</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/reset">Reset</a></li>
-        <?php if (isset($_SESSION['email'])){ ?>
-          <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/home/logout">Logout</a></li>
-        <?php } ?>
       </ul>
     </nav>
   </header>
