@@ -38,7 +38,7 @@ class Survivor extends Controller{
 			$userID = $this->user->getUserIDByEmail($this->email);
 			$userPosts = $this->post->allPostsByUser($userID);
 			$userProfile = $this->user->getProfileByID($userID);
-
+			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
 
 		    for($i = 0; $i < count($userPosts);$i++){
 				$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
@@ -75,14 +75,58 @@ class Survivor extends Controller{
 	
 	}
 
+
+	function search(){
+		if(isset($_POST['search'])){
+
+	
+		$searchValue = $_POST['search'];
+
+		
+		$email = Session::get('email');
+		$this->email = $email;
+		$userID = $this->user->getUserIDByEmail($this->email);
+		$search = $this->user->search($searchValue);
+		$userPosts = $this->post->allPostsByUser($userID);
+		$userProfile = $this->user->getProfileByID($userID);
+		$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile,'search' => $search]);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function post(){
 
+		if(isset($_POST['postBody']) && !empty($_POST['postBody'])){
+			 /*$passValue = explode('=',$_POST['postBody']);
+			 
+			$postBody = $passValue[1]; */
 
-		if(isset($_POST['postHomePage'])){
-
+				$postBody =	$_POST['postBody'];
 			$email = Session::get('email');
 			$this->email = $email;
-			$body =	strip_tags($_POST['postBody']);
+			$body =	strip_tags($postBody);
 			$check_empty = preg_replace('/\s+/','',$body);
 			if($check_empty !=""){
 				$body_array = preg_split('/\s+/',$body);
@@ -110,9 +154,11 @@ class Survivor extends Controller{
 					$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
 	
 					array_push($userPosts[$i],$profile,$userName);
+	
 				}
 	
-						$this->view('survivor/index', ['flashErr' => $flashMessage['successBlock'],'data' => $userPosts]);
+
+						$this->view('survivor/index', ['flashErr' => $flashMessage['successBlock'],'data' => $userPosts, 'messages'=> $postBody]);
 			}
 		}else{
 			$flashMessage['error'] = "You cannot post a blank field";
@@ -120,24 +166,23 @@ class Survivor extends Controller{
 		}
 	}
 
+
+
+
+
 	public function comment(){
-
-
-
 
 			$email = Session::get('email');
 			$this->email = $email;
 			$userID = $this->user->getUserIDByEmail($this->email);
 			$this->comment->insert($_POST);
-			
+		
 
 			if(isset($_SESSION)){
 				$email = Session::get('email');
 				$this->email = $email;
 				$userID = $this->user->getUserIDByEmail($this->email);
 				$userPosts = $this->post->allPostsByUser($userID);
-	
-	
 				for($i = 0; $i < count($userPosts);$i++){
 					$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
 					$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
@@ -157,11 +202,7 @@ class Survivor extends Controller{
 						}
 	
 					}
-	
-	
-	
 				}
-				
 	
 				if(isset($email)){
 	
@@ -179,38 +220,14 @@ class Survivor extends Controller{
 
 
 
-	public function topfive()
-	{ 
 
-		/*Need to add data model to dmg logs*/
-
-		$data = $this->single->topKills();
-		$this->view('survivor/topfive',['data' => $data]);
-	}
-
-
-
-
-
-
-	public function raw()
-	{ 
-		$raw = $this->single->getRaw();
-		/*Need to add data model to dmg logs*/
-
-		$this->view('survivor/raw',['data' => $raw]);
-	}
-	
 	
 
 
 	public function social()
 	{ 
-		
-
-
-
 		if(isset($_SESSION)){
+
 			$email = Session::get('email');
 			$this->email = $email;
 			$userID = $this->user->getUserIDByEmail($this->email);
@@ -218,6 +235,7 @@ class Survivor extends Controller{
 			$allPosts = $this->post->getRecentPosts();
 
 		    for($i = 0; $i < count($allPosts);$i++){
+
 				$profile = $this->user->getProfilePicByID($allPosts[$i]['added_by']);
 				$userName = $this->user->getUserNameByID($allPosts[$i]['added_by']);
 
@@ -228,20 +246,15 @@ class Survivor extends Controller{
 				if(isset($allPosts[$i]['comments'])){
 					if(count($allPosts[$i]['comments']) > 0){
 						for($c = 0; $c < count($allPosts[$i]['comments']);$c++){
+
 							$commentProfile = $this->user->getProfilePicByID($allPosts[$i]['comments'][$c]['posted_by']);
 							$commentUserName = $this->user->getUserNameByID($allPosts[$i]['comments'][$c]['posted_by']);
 					
 							array_push($allPosts[$i]['comments'][$c],$commentProfile,$commentUserName);
 						}
 					}
-
 				}
-
-
-
 			}
-			
-
 			if(isset($email)){
 				$this->view('survivor/social',['data' => $allPosts]);
 			}
@@ -257,14 +270,10 @@ class Survivor extends Controller{
 
 	public function profile()
 	{ 
-
 		$email = Session::get('email');
 		$this->email = $email;
-		
 		$userID = $this->user->getUserIDByEmail($this->email);
 		$profile = $this->user->getProfileByID($userID);
-
-
 		$this->view('survivor/profile',['data' => $profile]);
 	}
 
@@ -274,14 +283,10 @@ class Survivor extends Controller{
 		/*Need to add data model to dmg logs*/
 		$this->view('survivor/users',['data' => $users]);
 	}
+
+
 	public function upload_profile()
 	{
-		
-
-
-
-
-
 		$target_dir =  "../public/images/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
@@ -379,9 +384,55 @@ $profile = $this->user->updateProfileByID($userID,$_POST);
 		$this->view('survivor/factions');
 	}
 
+	public function topfive()
+	{ 
+		$data = $this->single->topKills();
+		$this->view('survivor/topfive',['data' => $data]);
+	}
+
+
+	public function raw()
+	{ 
+		$raw = $this->single->getRaw();
+		$this->view('survivor/raw',['data' => $raw]);
+	}
+	
+
+
 	public function upload_damage_logs(){
 		$this->view('survivor/upload_damage_logs');
 	}
+
+	public function server(){
+		
+		$cells = array();
+
+	
+		
+		  $file = explode("\n", file_get_contents('https://customer.i3d.net/gameserver-widget/806741/d6fd920ec9c1fcc85a93918faee6b052070fea6a/0', true));
+		  foreach($file as $key => $row){
+			  $cells[] = explode(", ",$row);
+		  
+		
+		}
+		echo "<pre>";
+		print_r($cells);
+		echo "</pre>";
+	
+		$website = explode("\n", file_get_contents('https://customer.i3d.net/gameserver/806741/Miscreated/judgement-day-pve--httpsdiscord.gganw2tej---whitelisted-o/d6fd920ec9c1fcc85a93918faee6b052070fea6a', true));
+		foreach($website as $key => $row){
+			$array[] = explode(", ",$row);
+		
+	  
+	  }
+	  echo "<pre>";
+	  print_r($array);
+	  echo "</pre>";
+  
+	
+	
+	}
+
 	public function uploading_damage_log(){
 		$target_dir =  "../app/dmg-log/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -398,37 +449,45 @@ $profile = $this->user->updateProfileByID($userID,$_POST);
 				$uploadOk = 0;
 			}
 		}
-		// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
+				// Check if file already exists
+		if (file_exists($target_file)) {
+			echo "Sorry, file already exists.";
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["fileToUpload"]["size"] > 500000) {
+			echo "Sorry, your file is too large.";
+			$uploadOk = 0;
+		}
 
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
 	}
+
+	function upload_dmg_log(){
+		$tmpName = $_FILES['csv']['tmp_name'];
+$csvAsArray = array_map('str_getcsv', file($tmpName));
+
+echo "<pre>";
+print_r($csvAsArray);
+echo "</pre>";
+	}
+
+
 
 	public function blog()
 	{ 
 		$this->view('survivor/blog');
 	}
-
-
-
 
 
 

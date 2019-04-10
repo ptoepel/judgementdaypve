@@ -7,6 +7,25 @@
 
   </div>
   <div class="grid__item grid__item--md-span-4">
+Search Users
+<form class="user-search" action="<?php echo URL; ?>/public/survivor/search" method="GET">
+
+<input type="text" class="search" name="userSearch" />
+<div class="search-result">
+<?php
+
+if(isset($data['search']) && !empty($data['search'])){
+  echo"<ul>";
+  foreach($data['search'] as $userStuff){
+  echo"<li><a href='".URL ."/public/survivor/user/". $userStuff['id'] ."' a>". $userStuff['userName']."</a></li>";
+  }
+  echo "</ul>";
+}
+?>
+</div>
+
+
+</form>
 
   </div>
   <div class="grid__item grid__item--md-span-4">
@@ -41,6 +60,11 @@
   <form class="home-post" action="<?php echo URL; ?>/public/survivor/post" method="POST">
 
     <textarea class="post-body" name="postBody" ></textarea>
+    <div class="hash-box">
+      <ul>
+        
+      </ul>
+    </div>
     <ul>
       <!-- GOT TO GET THIS WORKING -->
       <li><a class="photo-upload" href="/image/upload"><i class="fas fa-images"></i>Pics</a></li>
@@ -61,7 +85,19 @@
 
 <div class="grid">
   <div class="grid__item grid__item--md-span-4">
- 
+  <div class="new-bit-post">
+    <h2>Upcoming Events</h2>
+    <ul>
+      <li>
+      <div class="event-image-container">
+      <img src="" attribute="thumbnail" />
+      </div>
+      <h4>Event Name</h4>
+      <p>Start Date :<span></span></p>
+      <p>End Date :<span></span></p>
+    </li>
+    </ul>
+  </div>
   </div>
   <div class="grid__item grid__item--md-span-4">
     <article class="post-container">
@@ -153,7 +189,13 @@
         <div class="btn-line"></div>
       </div>
     <h3>Upload Photo</h3>
+    <form class="home-post" action="<?php echo URL; ?>/public/survivor/image_upload" method="POST">
     <input type="upload" name="post_photo_upload" />
+
+<button class="post-button" type="submit" name="postHomePage"><i class="fas fa-paper-plane"></i> POST</button>
+
+</form>
+
     </div>
   </div>
 </div>

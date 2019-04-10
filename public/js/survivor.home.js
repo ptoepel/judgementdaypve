@@ -1,21 +1,29 @@
 $(document).ready(function(){
-
     $(".comment").hide();
     $(".reply-box").hide();
 
-$(".post-button").on("click", function(e){
+$(".home-post").on("submit", function(e){
     e.preventDefault();
 
     var form_data = $(this).serialize();
 
-    $.ajax({
-        url:"public/survivor/post",
-        method:"POST",
-        data: form_data,
-        dataType:"JSON",
-        async:true,
-    })
-    .done(function ajaxDone($data){
+    $.post('http://localhost/miscreated-dmg-log-dashboard/public/survivor/post',{postBody:form_data}, function(data){
+    if(data.length == 0) {
+        //empty result
+      } else {
+
+
+        var content = $(data).find('.post-comment-container');
+        $(".post-container").empty().append(content);
+        $(".comment").hide();
+        $(".reply-box").hide();
+       /* $('.post').html(data); */
+     }
+  
+   
+    });
+    /*
+    .done(function ajaxDone(data){
         console.log(data);  
     })
     .fail(function ajaxFailed(e){
@@ -23,7 +31,7 @@ $(".post-button").on("click", function(e){
     })
     .always(function(data){
         console.log('Always');
-    })
+    })*/
 });
 
 

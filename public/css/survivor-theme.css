@@ -432,6 +432,80 @@ footer {
   z-index: -1;
   background: rgba(74, 71, 41, 0.9); }
 
+#survivor-profile .header-background-img img {
+  height: 400px;
+  width: 100%; }
+
+#survivor-profile .header-container {
+  position: relative; }
+
+#survivor-profile .profile-image-container {
+  position: absolute;
+  left: 0;
+  bottom: 4%; }
+
+#survivor-report table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed; }
+
+#survivor-report table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em; }
+
+#survivor-report table tr {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid #ddd;
+  padding: .35em; }
+
+#survivor-report table th,
+#survivor-report table td {
+  padding: .625em;
+  text-align: center; }
+
+#survivor-report table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase; }
+
+@media screen and (max-width: 600px) {
+  #survivor-report table {
+    border: 0; }
+  #survivor-report table caption {
+    font-size: 1.3em; }
+  #survivor-report table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  #survivor-report table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em; }
+  #survivor-report table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+  #survivor-report table td::before {
+    /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+  #survivor-report table td:last-child {
+    border-bottom: 0; } }
+
 /*********************
 RESPONSIVE BREAKPOINT
 **********************/
@@ -1044,9 +1118,15 @@ MOBILE NAV STYLES
 @media screen and (max-width: 500px) {
   main#home h1 {
     margin-top: 10vh; }
-  main#about {
-    display: grid;
-    grid-template-columns: 1 1fr; } }
+  .about-info {
+    display: block; }
+  .menu-branding .portrait {
+    visibility: hidden;
+    display: none; }
+  .menu-branding p {
+    visibility: hidden; }
+  .menu-branding h1 {
+    font-size: 2rem; } }
 
 @media screen and (max-width: 768px) {
   main {
@@ -1068,4 +1148,81 @@ MOBILE NAV STYLES
     font-size: 24px; }
   .menu-branding {
     height: 25vh;
-    transform: translate3d(100%, 0, 0); } }
+    transform: translate3d(100%, 0, 0); }
+  .about-info {
+    display: block; }
+  .menu-branding .portrait {
+    visibility: hidden;
+    display: none; }
+  .menu-branding p {
+    visibility: hidden; }
+  .menu-branding h1 {
+    font-size: 2rem; }
+  #survivor-report table {
+    border: 0; }
+  #survivor-report table caption {
+    font-size: 1.3em; }
+  #survivor-report table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  #survivor-report table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em; }
+  #survivor-report table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+  #survivor-report table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+  #survivor-report table td:last-child {
+    border-bottom: 0; } }
+
+@media screen and (max-width: 769px) and (max-width: 1170px) {
+  #survivor-report table {
+    border: 0; }
+  #survivor-report table caption {
+    font-size: 1.3em; }
+  #survivor-report table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  #survivor-report table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em; }
+  #survivor-report table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+  #survivor-report table td::before {
+    /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+  #survivor-report table td:last-child {
+    border-bottom: 0; } }

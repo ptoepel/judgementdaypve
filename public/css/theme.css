@@ -166,8 +166,7 @@ main {
     margin-top: 20vh; }
 
 form {
-  background: rgba(75, 72, 41, 0.5);
-  height: 15vh; }
+  background: rgba(75, 72, 41, 0.5); }
 
 .menu-btn {
   position: absolute;
@@ -213,8 +212,10 @@ form {
     transform: translate3d(0, 100%, 0);
     transition: all 1.5s ease-out; }
     .menu-branding .portrait {
-      border: 0.5rem solid #3a3720;
-      border-radius: 50%; }
+      /*border:0.5rem solid #3a3720;*/
+      border-radius: 50%;
+      -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
     .menu-branding h1 {
       font-size: 3rem;
       color: #FFCB46; }
@@ -330,7 +331,7 @@ footer {
 #contact {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr); }
+  /* grid-template-rows: repeat(6,1fr); */ }
   #contact#contact {
     background: url("http://localhost/miscreated-dmg-log-dashboard/public/css/images/get_out.jpg");
     background-attachment: fixed;
@@ -419,7 +420,6 @@ footer {
 #register form {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 100%;
   grid-gap: 1rem; }
 
 #register form input {
@@ -484,14 +484,13 @@ footer {
 
 #login form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  height: 100%;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem; }
 
 #login form input {
   height: 32px;
-  grid-column-start: 1;
-  grid: column end 2; }
+  grid-column-start: 2;
+  grid: column end 3; }
 
 #login form label {
   grid-column-start: 2;
@@ -519,7 +518,6 @@ footer {
 #reset form {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 100%;
   grid-gap: 1rem; }
 
 #reset form input {
@@ -617,12 +615,22 @@ footer {
     background-clip: content-box;
     border: 1px solid rgba(0, 0, 0, 0.1); }
 
+@media all and (max-width: 1735px) {
+  .about-info {
+    display: block; } }
+
 @media screen and (max-width: 500px) {
   main#home h1 {
     margin-top: 10vh; }
-  main#about {
-    display: grid;
-    grid-template-columns: 1 1fr; } }
+  .about-info {
+    display: block; }
+  .menu-branding .portrait {
+    visibility: hidden;
+    display: none; }
+  .menu-branding p {
+    visibility: hidden; }
+  .menu-branding h1 {
+    font-size: 2rem; } }
 
 @media screen and (max-width: 768px) {
   main {
@@ -644,4 +652,13 @@ footer {
     font-size: 24px; }
   .menu-branding {
     height: 25vh;
-    transform: translate3d(100%, 0, 0); } }
+    transform: translate3d(100%, 0, 0); }
+  .about-info {
+    display: block; }
+  .menu-branding .portrait {
+    visibility: hidden;
+    display: none; }
+  .menu-branding p {
+    visibility: hidden; }
+  .menu-branding h1 {
+    font-size: 2rem; } }

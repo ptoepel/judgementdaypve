@@ -38,7 +38,7 @@ function getProfileByID(){
 
     function allPostsByUser($userID){
 
-      $result =  Database::query('SELECT * FROM posts WHERE added_by=:id ORDER BY date_added DESC', array(':id'=> $userID));
+      $result =  Database::query('SELECT * FROM posts WHERE added_by=:id ORDER BY date_added DESC LIMIT 10', array(':id'=> $userID));
       return $result;
     }
 

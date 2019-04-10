@@ -6,7 +6,7 @@ public $cells = array();
 
 public function getFile() {
 
-  $file = explode("\n", file_get_contents('http://localhost/miscreated-dmg-log-dashboard/app/dmg-log/damagelog_2018-01-26.txt', true));
+  $file = explode("\n", file_get_contents('http://localhost/miscreated-dmg-log-dashboard/app/dmg-log/damagelog_2019-04-09.txt', true));
   foreach($file as $key => $row){
       $cells[] = explode(", ",$row);
   }
@@ -17,19 +17,22 @@ public function getFile() {
 public function getRaw() {
 $cells = $this->getFile();
 	if($cells != null){
-		$table = "<table id='myTable'>";
+		$table = "<table >";
+		$table .= "<thead>";
 		$table .="<tr>";
 		foreach($cells as $key => $row){
 			if($key == 0){
 				foreach($row as $k => $r){
 					$incident = explode(":",$r);
+					
 					if($k !=0){
-						$table .= "<th>$incident[0]</th>";
+						$table .= "<th  scope='col'>$incident[0]</th>";
 					}
 				}
 			}
 		}
 		$table .="</tr>";
+		$table .="</thead>";
 		foreach($cells as $key => $row){
 			$table .="<tr>";
 			foreach($row as $k => $r){

@@ -20,7 +20,7 @@
    
   </div>
   <div class="grid__item grid__item--md-span-4">
- 
+  <iframe src="https://discordapp.com/widget?id=497595194041171979&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
   </div>
   <div class="grid__item grid__item--md-span-4">
   

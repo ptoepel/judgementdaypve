@@ -26,14 +26,20 @@ class User
 		Database::query('INSERT INTO users (userName,password,email,steamID,userType,isActive) VALUES(:userName,:password,:email,:steamID,:userType,:isActive)', array(':userName'=> $this->userName,':password'=>$this->password,':email' => $email,':steamID'=>$this->steamID,':userType' => $this->userType, ':isActive'=> $this->isActive ));
 	}
 
-
-
   function getUserByID($id){
 		$this->id = $id;
    	$result = Database::query('SELECT userName,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
     return $result;
   }
 
+  function search($username){
+
+
+    $this->userName = $username ;
+    $username = "%$username%";
+    $result =   Database::query('SELECT id,userName FROM users WHERE userName LIKE :userName', array(':userName'=> $username));
+    return $result;
+  }
 
   function getProfileByID($id){
 		$this->id = $id;
