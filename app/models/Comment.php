@@ -29,6 +29,15 @@ Class Comment{
         return $result;
     }
 
-
+    function deleteComment($commentID,$username){
+        $this->id = $commentID;
+        $result =  Database::query('DELETE * FROM comments WHERE comment_id=:comment_id && userID', array(':comment_id'=> $this->id));
+        return $result;
+    }
+    function deleteAllCommentsForPost($postID){
+        $this->id = $postID;
+        $result =  Database::query('DELETE * FROM comments WHERE post_id=:post_id', array(':post_id'=> $this->id));
+        return $result;
+    }
 
 }

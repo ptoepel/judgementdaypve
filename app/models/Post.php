@@ -52,5 +52,9 @@ function getProfileByID(){
 
 
 
+    function likePost(){
+      
+    }
+
 
 }

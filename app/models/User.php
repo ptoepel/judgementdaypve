@@ -47,6 +47,12 @@ class User
     return $result;
   }
 
+  function deletePost($id){
+		$this->id = $id;
+   	$result = Database::query('DELETE * FROM users WHERE id=:id', array(':id'=>$this->id));
+    return $result;
+  }
+
   function getProfilePicByID($userID){
     $result = Database::query('SELECT profileImage FROM users WHERE id=:id', array(':id'=>$userID));
     return $result;
@@ -122,6 +128,20 @@ class User
         return $val;
       }
   }
+
+
+  function getMention(){
+    
+  }
+
+
+
+
+
+
+
+
+
 
 
 }

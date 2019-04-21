@@ -145,6 +145,7 @@ class Login extends Controller
 	
 				Session::set('email',$this->email);
 				$addedByID =	$this->user->getUserIDByEmail($this->email);
+				Session::set('userID',$addedByID);
 				$userPosts = $this->post->allPostsByUser($addedByID);
 				$profile = $this->user->getProfileByID($addedByID);
 
@@ -263,6 +264,7 @@ public function userResetEmail(){
     }
   }
 } // userResetEmail
+
 public function logout(){
 	Session::destroy();
 	$this->view('home/index');

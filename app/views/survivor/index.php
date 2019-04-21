@@ -62,7 +62,16 @@ if(isset($data['search']) && !empty($data['search'])){
     <textarea class="post-body" name="postBody" ></textarea>
     <div class="hash-box">
       <ul>
-        
+      <?php if(isset($data['hashtag']) && !empty($data['hashtag'])){ 
+
+            echo "<li><span class='getValue'>". $data['hashtag']. "</li>";
+          
+     }?>
+       <?php
+       if(isset($data['mentions']) && !empty($data['mentions'])){ 
+       echo"<li data-user='". $userStuff['id']."' data-post=''><a href='".URL ."/public/survivor/user/". $userStuff['id'] ."' a>". $userStuff['userName']."</a></li>";
+       }
+?>
       </ul>
     </div>
     <ul>
@@ -79,6 +88,22 @@ if(isset($data['search']) && !empty($data['search'])){
   <div class="grid__item grid__item--md-span-4">
     <div class="trending-posts">
     <h3>Trending Posts</h3>
+      <div>
+        <ul>
+          <?php
+            /*echo "<pre>";
+            print_r($data);
+            echo "</pre>";*/
+          ?>
+
+        <?php if(isset($data['hashtagData']) && !empty($data['hashtagData'])){ 
+                foreach($data['hashtagData'] as $hashtagData){
+                  echo "<li><span class='simpleValue'>".$hashtagData['hashtag']."</span></li>";
+                }
+              }
+        ?>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -102,25 +127,25 @@ if(isset($data['search']) && !empty($data['search'])){
   <div class="grid__item grid__item--md-span-4">
     <article class="post-container">
     <?php
-    /*
-   echo"<pre>";
-   print_r($data);
-   echo"</pre>";
-   */
+
     foreach($data['data'] as $post){
      
       
-        echo "<div class='post-comment-container postID".$post['id']."'>";
+        echo "<div class='post-comment-container postID-".$post['id']."'>";
         echo "<div class='post'>";
         echo '<img src='. URL . $post[10][0]['profileImage'].' />';
         echo '<p><span>'. $post[11][0]['userName'].'</span></p>';
         echo "<div class='post-text-body'>";
-        echo  $post['body'];
+        echo  "<span>" . $post['body']. "</span>";
 
         echo "</div>";
         echo "<div class='date-added'>";
         echo  date("m-d-Y g:i:s",strtotime($post['date_added']));
         echo "</div>";
+        echo "<div class='delete-post-container'>";
+        echo  "<a href='#' class='delete-post'>X</a>";
+        echo "</div>";
+
         echo "<a class='reply' href='". URL ."/public/survivor/comment/".$post['id']."'>Reply</a>";
         echo "</div>";
         if(array_key_exists("comments",$post)){
@@ -138,6 +163,12 @@ if(isset($data['search']) && !empty($data['search'])){
 
             echo "<div class='date-added'>";
             echo  date("n-j-Y g:i:s",strtotime($comment['date_added']));
+            echo "</div>";
+
+            echo "<div class='delete-comment-container'>";
+            if($comment->$commentBy == $userID ){
+            echo  "<div class='delete-comment'>X</div>";
+            }
             echo "</div>";
               
             echo"</div>";
@@ -185,17 +216,24 @@ if(isset($data['search']) && !empty($data['search'])){
   <div class="grid__item grid__item--md-span-12">
     <div class="pop-container">
       <div class="close-pop-up-container">
-        <div class="btn-line"></div>
-        <div class="btn-line"></div>
+        <!--<div class="btn-line"></div>
+        <div class="btn-line"></div> -->
+        X
       </div>
-    <h3>Upload Photo</h3>
-    <form class="home-post" action="<?php echo URL; ?>/public/survivor/image_upload" method="POST">
-    <input type="upload" name="post_photo_upload" />
-
-<button class="post-button" type="submit" name="postHomePage"><i class="fas fa-paper-plane"></i> POST</button>
-
-</form>
-
+      <div class="upload-photo hidden">
+        <h3>Upload Photo</h3>
+        <form class="photo-post" action="<?php echo URL; ?>/public/survivor/image_upload" method="POST">
+          <input type="upload" name="post_photo_upload" />
+          <button class="post-button" type="submit" name="postHomePage"><i class="fas fa-paper-plane"></i> POST</button>
+        </form>
+      </div>
+      <div class="upload-youtube hidden">
+        <h3>Youtube Video</h3>
+        <form class="youtube-post" action="<?php echo URL; ?>/public/survivor/youtube_upload" method="POST">
+          <input type="text" name="youtube_upload" />
+          <button class="post-button" type="submit" name="postYouTube"><i class="fas fa-paper-plane"></i> POST</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

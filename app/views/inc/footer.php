@@ -2,6 +2,7 @@
 
 
 </div> <!-- container div -->
+
 <footer>
   <p>Judgement Day PVE &copy; <?php echo Date('Y'); ?>
   <div>
@@ -13,7 +14,9 @@
   <script src="<?php echo URL; ?>/public/js/jquery.js"></script>
 
   <script>
-
+$(window).on('load', function(){
+    $('#cover').fadeOut(1900);
+})
 
 const menuBtn = document.querySelector('.menu-btn');
 const menu = document.querySelector('.menu');

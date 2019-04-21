@@ -12,11 +12,12 @@ class Survivor extends Controller{
 		$this->post = $this->model('Post');
 		$this->single = $this->model('Single');
 		$this->comment = $this->model('Comment');
-		
+		$this->message = $this->model('Message');
+		$this->hashtag = $this->model('Hashtag');
 
 
 		if(isset($_SESSION)){
-			if(isset($_SESSION['email'])){
+			if(isset($_SESSION['email']) ){
 
 			}else{
 				$this->view('login/index');
@@ -39,6 +40,18 @@ class Survivor extends Controller{
 			$userPosts = $this->post->allPostsByUser($userID);
 			$userProfile = $this->user->getProfileByID($userID);
 			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
+			if(isset($_POST['hashtag']) && !empty($_POST['hashtag'])){
+				$hashtag = $_POST['hashtag'];
+				$this->hashtag->insert($hashtag);
+				}
+		
+				/*$hashData = $this->hashtag->getHashtags();*/
+	
+				/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
+				$hashtagData = $this->hashtag->getFiveRecentHashtags();
+
+
+
 
 		    for($i = 0; $i < count($userPosts);$i++){
 				$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
@@ -64,10 +77,9 @@ class Survivor extends Controller{
 
 			}
 			
-
 			if(isset($email)){
 
-				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile]);
+				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile,'hashtagData'=> $hashtagData]);
 			}
 		}else{
 			$this->view('login/index');
@@ -94,51 +106,27 @@ class Survivor extends Controller{
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public function post(){
 
 		if(isset($_POST['postBody']) && !empty($_POST['postBody'])){
-			 /*$passValue = explode('=',$_POST['postBody']);
-			 
-			$postBody = $passValue[1]; */
 
-				$postBody =	$_POST['postBody'];
+			$postBody =	$_POST['postBody'];
 			$email = Session::get('email');
 			$this->email = $email;
 			$body =	strip_tags($postBody);
 			$check_empty = preg_replace('/\s+/','',$body);
+
 			if($check_empty !=""){
 				$body_array = preg_split('/\s+/',$body);
 				$body = implode(" ",$body_array);
 				$dateAdded = date("Y-m-d H:i:s");
-
-
 				$addedByID = $this->user->getUserIDByEmail($this->email);
 				$userToID = null;
+
 				if($userToID == $addedByID){
 					$userToID = 0;
 				}
+
 				$userToID = 0;
 				$userClosed = date("Y-m-d H:i:s");
 				$deleted = "yes";
@@ -165,9 +153,6 @@ class Survivor extends Controller{
 			$this->view('survivor/index', ['flashErr' => $flashMessage['error']]);
 		}
 	}
-
-
-
 
 
 	public function comment(){
@@ -214,14 +199,6 @@ class Survivor extends Controller{
 			
 		
 	}
-
-
-
-
-
-
-
-	
 
 
 	public function social()
@@ -303,50 +280,42 @@ class Survivor extends Controller{
 			}
 		}
 		// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
-}
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-}
+		if (file_exists($target_file)) {
+			echo "Sorry, file already exists.";
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["fileToUpload"]["size"] > 500000) {
+			echo "Sorry, your file is too large.";
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
 		
 
-$email = Session::get('email');
-$this->email = $email;
-$_POST['fileToUpload'] = $target_file;
+		$email = Session::get('email');
+		$this->email = $email;
+		$_POST['fileToUpload'] = $target_file;
 
-$userID = $this->user->getUserIDByEmail($this->email);
-
-
-$profile = $this->user->updateProfileByID($userID,$_POST);
+		$userID = $this->user->getUserIDByEmail($this->email);
 
 
-
-
-
-
-
-
+		$profile = $this->user->updateProfileByID($userID,$_POST);
 
 	}
 
@@ -390,13 +359,22 @@ $profile = $this->user->updateProfileByID($userID,$_POST);
 		$this->view('survivor/topfive',['data' => $data]);
 	}
 
-
 	public function raw()
 	{ 
 		$raw = $this->single->getRaw();
 		$this->view('survivor/raw',['data' => $raw]);
 	}
 	
+	public function blog()
+	{ 
+		$this->view('survivor/blog');
+	}
+
+	public function messages()
+	{
+		$this->view('survivor/messages');
+	}
+
 
 
 	public function upload_damage_logs(){
@@ -433,7 +411,8 @@ $profile = $this->user->updateProfileByID($userID,$_POST);
 	
 	}
 
-	public function uploading_damage_log(){
+	public function uploading_damage_log()
+	{
 		$target_dir =  "../app/dmg-log/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
@@ -473,29 +452,89 @@ $profile = $this->user->updateProfileByID($userID,$_POST);
 		}
 	}
 
-	function upload_dmg_log(){
+	function upload_dmg_log()
+	{
 		$tmpName = $_FILES['csv']['tmp_name'];
-$csvAsArray = array_map('str_getcsv', file($tmpName));
+		$csvAsArray = array_map('str_getcsv', file($tmpName));
 
-echo "<pre>";
-print_r($csvAsArray);
-echo "</pre>";
+		echo "<pre>";
+		print_r($csvAsArray);
+		echo "</pre>";
 	}
 
 
 
-	public function blog()
-	{ 
-		$this->view('survivor/blog');
+	function delete_post(){
+
+		if(isset($_POST['deletePost']) && !empty($_POST['deletePost'])){
+			$this->postID = $postID;
+			$this->userID = Session::get('userID');
+		}
+
 	}
 
+	function delete_comment(){
+
+		if(isset($_POST['deleteComment']) && !empty($_POST['deleteComment'])){
+			$this->commentID = $commentID;
+			$this->userID = Session::get('userID');
+		}
+	}
+
+	function hashtag()
+	{
+		
+		if(isset($_SESSION)){
+			$email = Session::get('email');
+			$this->email = $email;
+			$userID = $this->user->getUserIDByEmail($this->email);
+			$userPosts = $this->post->allPostsByUser($userID);
+			$userProfile = $this->user->getProfileByID($userID);
+			if(isset($_POST['hashtag']) && !empty($_POST['hashtag'])){
+			$hashtag = $_POST['hashtag'];
+			$this->hashtag->insert($hashtag);
+			}
+	
+			/*$hashData = $this->hashtag->getHashtags();*/
+
+			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
+			$hashtagData = $this->hashtag->getFiveRecentHashtags();
+
+		    for($i = 0; $i < count($userPosts);$i++){
+				$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
+				$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
+
+				array_push($userPosts[$i],$profile,$userName);
+
+				$userPosts[$i]['comments'] = $this->comment->getAllCommentsForPostID($userPosts[$i]['id']);
+
+				if(isset($userPosts[$i]['comments'])){
+					if(count($userPosts[$i]['comments']) > 0){
+						for($c = 0; $c < count($userPosts[$i]['comments']);$c++){
+							$commentProfile = $this->user->getProfilePicByID($userPosts[$i]['comments'][$c]['posted_by']);
+							$commentUserName = $this->user->getUserNameByID($userPosts[$i]['comments'][$c]['posted_by']);
+					
+							array_push($userPosts[$i]['comments'][$c],$commentProfile,$commentUserName);
+						}
+					}
+
+				}
 
 
 
+			}
+			
+			if(isset($email)){
+
+				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile, 'hashtag' =>$hashtag, 'hashtagData' => $hashtagData]);
+			}
+		}else{
+			$this->view('login/index');
+		}
 
 
 
-
+	}
 
 
 

@@ -163,7 +163,32 @@ main {
     z-index: -1;
     background: rgba(74, 71, 41, 0.9); }
   #home h1 {
-    margin-top: 20vh; }
+    margin-top: 20vh;
+    animation: moveRight 1s ease-in; }
+  #home h2 {
+    animation: moveLeft 1s ease-in; }
+
+#about h1 {
+  animation: moveRight 1s ease-in; }
+
+#about h2 {
+  animation: moveLeft 1s ease-in; }
+
+@keyframes moveRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
 
 form {
   background: rgba(75, 72, 41, 0.5); }
@@ -298,6 +323,10 @@ form {
   grid-gap: 30px;
   grid-template-areas: 'bioimage bio bio' 'job1 job2 job3';
   grid-template-columns: repeat(3, 1fr); }
+  .about-info img {
+    border: 0;
+    object-fit: cover;
+    width: 100%; }
 
 .bio-image {
   grid-area: bioimage; }
@@ -619,11 +648,20 @@ footer {
   .about-info {
     display: block; } }
 
+#cover {
+  background: url("to/your/ajaxloader.gif") no-repeat scroll center center rgba(0, 0, 0, 0.1);
+  position: absolute;
+  height: 100%;
+  width: 100%; }
+
 @media screen and (max-width: 500px) {
   main#home h1 {
     margin-top: 10vh; }
   .about-info {
-    display: block; }
+    display: grid;
+    grid-gap: 30px;
+    grid-template-areas: 'bioimage' 'bio' 'bio' 'job1' 'job2' 'job3';
+    grid-template-columns: repeat(1, 1fr); }
   .menu-branding .portrait {
     visibility: hidden;
     display: none; }
@@ -654,11 +692,82 @@ footer {
     height: 25vh;
     transform: translate3d(100%, 0, 0); }
   .about-info {
-    display: block; }
+    display: grid;
+    grid-gap: 30px;
+    grid-template-areas: 'bioimage' 'bio' 'bio' 'job1' 'job2' 'job3';
+    grid-template-columns: repeat(1, 1fr); }
   .menu-branding .portrait {
     visibility: hidden;
     display: none; }
   .menu-branding p {
     visibility: hidden; }
   .menu-branding h1 {
-    font-size: 2rem; } }
+    font-size: 2rem; }
+  #survivor-report table {
+    border: 0; }
+  #survivor-report table caption {
+    font-size: 1.3em; }
+  #survivor-report table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  #survivor-report table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em; }
+  #survivor-report table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+  #survivor-report table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+  #survivor-report table td:last-child {
+    border-bottom: 0; } }
+
+@media screen and (max-width: 769px) {
+  #survivor-report table {
+    border: 0; }
+  #survivor-report table caption {
+    font-size: 1.3em; }
+  #survivor-report table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  #survivor-report table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em; }
+  #survivor-report table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+  #survivor-report table td::before {
+    /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+  #survivor-report table td:last-child {
+    border-bottom: 0; } }

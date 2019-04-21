@@ -20,6 +20,7 @@
 
 </head>
 <body>
+
   <header>
 
     <div class="menu-btn">
@@ -39,11 +40,9 @@
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/home/index">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/about/index">About</a></li>
     	  <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/blog/index">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/contact/index">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/index">Login</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/register">Register</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/reset">Reset</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo URL; ?>/public/login/index">Login/Register</a></li>
       </ul>
     </nav>
   </header>
   <div class="container">
+  <div id="cover"></div>
