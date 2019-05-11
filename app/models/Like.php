@@ -1,13 +1,13 @@
 <?php
 
-Class Hashtag{
+Class Like{
 
    
    public $hashtag;
    public $createdOn;
 
 
-    public function getHashtags($hashtag)
+    public function getTotalLikes($hashtag)
     {
         /* Limit Hashtag*/
         $this->hashtag = $hashtag ;
@@ -17,7 +17,7 @@ Class Hashtag{
 
     }
    
-    public function getFiveRecentHashtags()
+    public function like()
     {
         /* Limit Hashtag*/
 
@@ -27,14 +27,12 @@ Class Hashtag{
 
     }
 
-    function getTrendByHash($hashtag)
+    function getMostRecentLike()
     {
-        $hashtag = "%$hashtag%";
-        $result =   Database::query('SELECT id,userName FROM hashtag WHERE hashtag LIKE :hashtag', array(':hashtag'=> $hashtag));
-        return $result;
+
     }
 
-    public function insert($hashtag){
+    public function getHighestLiked($hashtag){
         /* Limit Hashtag*/
         $this->hashtag = $hashtag ;
         $this->createdOn = date("Y-m-d H:i:s");

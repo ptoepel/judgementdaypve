@@ -21,4 +21,8 @@ Class Message{
         return $result;
        
     }
+
+    public function sendMessage(){
+        
+    }
 }
