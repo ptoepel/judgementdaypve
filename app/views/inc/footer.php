@@ -60,9 +60,8 @@ if(menuBtn){
 <script src="<?php print URL; ?>/public/js/contact.js"></script>
 <script src="<?php print URL; ?>/public/js/register.js"></script>
 <script src="<?php print URL; ?>/public/js/login.js"></script>
-<script src="<?php print URL; ?>/public/js/h.js"></script>
-<script src="<?php print URL; ?>/public/js/home.js"></script>
-<script src="<?php print URL; ?>/public/js/home.js"></script>
+<script src="<?php print URL; ?>/public/js/hashtag.js"></script>
+<script src="<?php print URL; ?>/public/js/mention.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="<?php echo URL; ?>/public/js/app.js"></script>
 </footer>

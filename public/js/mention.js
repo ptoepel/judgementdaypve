@@ -6,7 +6,7 @@ $(function(){
         var max = 255;
 
         if(text != null){
-            if(text.substring(0,1) === '@'){
+            if(text.toString().substr(0,1) === '@'){
             var dataString = 'mention='+ text;
             $.ajax({
                 type:"POST",

@@ -10,8 +10,8 @@ Class Hashtag{
     public function getHashtags($hashtag)
     {
         /* Limit Hashtag*/
-        $this->hashtag = $hashtag ;
-        $result =   Database::query('SELECT * FROM hashtags WHERE hashtag LIKE :hashtag', array(':hashtag'=> $hashtag));
+        $this->hashtag = "%$hashtag%";
+        $result =   Database::query('SELECT * FROM hashtags WHERE hashtag LIKE :hashtag LIMIT 5', array(':hashtag'=> $hashtag));
 
         return $result;
 
@@ -27,11 +27,17 @@ Class Hashtag{
 
     }
 
-    function getTrendByHash($hashtag)
+    function addTrend($hashtag)
     {
-        $hashtag = "%$hashtag%";
-        $result =   Database::query('SELECT id,userName FROM hashtag WHERE hashtag LIKE :hashtag', array(':hashtag'=> $hashtag));
-        return $result;
+
+        preg_match_all("/#+([a-zA-Z0-9_]+)/i",$hashtag,$matches);
+        if($matches){
+        $result = array_values($matches[1]);
+        }
+        $this->hashtag = $hashtag;
+        $this->createdOn = date("Y-m-d H:i:s");
+        $result =  Database::query('INSERT INTO hashtags (hashtag,createdDate) VALUES (:hashtag,:createdOn)', array(':hashtag'=> $this->hashtag,':createdOn'=>$this->createdOn));
+
     }
 
     public function insert($hashtag){

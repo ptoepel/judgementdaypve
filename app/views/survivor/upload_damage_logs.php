@@ -20,7 +20,7 @@
    
   </div>
   <div class="grid__item grid__item--md-span-4">
-  <form action="<?php echo URL; ?>/public/survivor/upload_dmg_log" method="POST" enctype="multipart/form-data">
+  <form action="<?php echo URL; ?>/public/survivor/uploading_damage_log" method="POST" enctype="multipart/form-data">
         Select image to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Damage Log" name="damage_log_upload">

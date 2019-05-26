@@ -6,7 +6,8 @@ $(function(){
         var max = 255;
 
         if(text != null){
-            if(text.substring(0,1) === '#'){
+            console.log(text);
+            if(text.toString().substr(0,1) === '#'){
             var dataString = 'hashtag='+ text;
             $.ajax({
                 type:"POST",

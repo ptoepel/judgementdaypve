@@ -4,9 +4,7 @@ class Single {
 // https://github.com/zyberspace/php-steam-web-api-client
 public $cells = array();
 
-public function getFile() {
-
-  $file = explode("\n", file_get_contents('http://localhost/miscreated-dmg-log-dashboard/app/dmg-log/damagelog_2019-04-09.txt', true));
+public function getFile($passed_file) {
   foreach($file as $key => $row){
       $cells[] = explode(", ",$row);
   }
@@ -14,8 +12,11 @@ public function getFile() {
 }
 
 // Return a table of Raw Data
-public function getRaw() {
-$cells = $this->getFile();
+public function getRaw($uploaded_file) {
+	/* working path example http://localhost/miscreated-dmg-log-dashboard/app/dmg-log/damagelog_2019-04-09.txt */
+	$file = explode("\n", file_get_contents($uploaded_file, true));
+
+$cells = $this->getFile($file);
 	if($cells != null){
 		$table = "<table >";
 		$table .= "<thead>";
@@ -53,8 +54,8 @@ return $table;
 // Return the name of the player with the top kills
 
 
-public function topKills() {
-  $cells = $this->getFile();
+public function topKills($file) {
+  $cells = $this->getFile($file);
   $killcount = array();
   $killerarray = array();
   $killer = array();

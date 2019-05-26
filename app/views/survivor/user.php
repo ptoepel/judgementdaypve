@@ -35,17 +35,18 @@
     <?php
 
     foreach($data['data'] as $field){
-     
-      
-       
-        echo "<div class='post'>";
+     print_r($field);
+      echo "<div class='user-profile-view'>";
+        echo "<div class='user-profile-background' style='background:url(". URL . $field['profileCover']. ")'></div>";
         echo "<div class='post-text-body'>";
         echo  $field['userName'];
         echo  $field['email'];
         echo  $field['steamID'];
         echo "</div>";
+        echo "<div class='post'>";
+
         echo "</div>";
-      
+      echo "</div>";
       
     }
 

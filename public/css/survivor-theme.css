@@ -32,7 +32,7 @@ header {
   color: #FFCB46; }
 
 main {
-  padding: 4rem;
+  padding-top: 4rem;
   min-height: calc(100vh - 60px); }
   main position:relative
 .icons {
@@ -63,6 +63,10 @@ main {
 
 form {
   background: rgba(75, 72, 41, 0.5); }
+
+.search {
+  width: 100%;
+  height: 35px; }
 
 .menu-btn {
   position: absolute;
@@ -256,6 +260,7 @@ footer {
 .image-box {
   height: 100px;
   width: 100px;
+  margin: 0 auto;
   border-radius: 50%; }
 
 .comment-box {
@@ -388,6 +393,13 @@ footer {
   width: 100%;
   background: #FFCB46;
   color: white;
+  font-weight: bold; }
+
+.home-post button:hover {
+  padding: 0.7rem 0;
+  width: 100%;
+  background: white;
+  color: #FFCB46;
   font-weight: bold; }
 
 .delete-post-container {
@@ -1211,7 +1223,7 @@ MOBILE NAV STYLES
   #survivor-report table td:last-child {
     border-bottom: 0; } }
 
-@media screen and (max-width: 769px) and (max-width: 1170px) {
+@media screen and (max-width: 769px) {
   #survivor-report table {
     border: 0; }
   #survivor-report table caption {

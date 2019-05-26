@@ -14,6 +14,7 @@ class Survivor extends Controller{
 		$this->comment = $this->model('Comment');
 		$this->message = $this->model('Message');
 		$this->hashtag = $this->model('Hashtag');
+		$this->mention = $this->model('Mention');
 
 
 		if(isset($_SESSION)){
@@ -42,14 +43,14 @@ class Survivor extends Controller{
 			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
 			if(isset($_POST['hashtag']) && !empty($_POST['hashtag'])){
 				$hashtag = $_POST['hashtag'];
-				$this->hashtag->insert($hashtag);
-				}
-		
+				$hashtagSearchData = $this->hashtag->getHashtags($hashtag);
+			}else{
+				$hashtagSearchData = null;
+			}
 				/*$hashData = $this->hashtag->getHashtags();*/
-	
 				/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
 				$hashtagData = $this->hashtag->getFiveRecentHashtags();
-
+				
 
 
 
@@ -79,7 +80,7 @@ class Survivor extends Controller{
 			
 			if(isset($email)){
 
-				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile,'hashtagData'=> $hashtagData]);
+				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile,'hashtagData'=> $hashtagData,'hashtagSearchData'=> $hashtagSearchData]);
 			}
 		}else{
 			$this->view('login/index');
@@ -454,7 +455,10 @@ class Survivor extends Controller{
 
 	function upload_dmg_log()
 	{
-		$tmpName = $_FILES['csv']['tmp_name'];
+
+
+
+		$tmpName = $_FILES['fileToUpload']['tmp_name'];
 		$csvAsArray = array_map('str_getcsv', file($tmpName));
 
 		echo "<pre>";
@@ -468,7 +472,7 @@ class Survivor extends Controller{
 
 		if(isset($_POST['deletePost']) && !empty($_POST['deletePost'])){
 			$this->postID = $postID;
-			$this->userID = Session::get('userID');
+			$this->userID = Session::get('email');
 		}
 
 	}
@@ -477,7 +481,7 @@ class Survivor extends Controller{
 
 		if(isset($_POST['deleteComment']) && !empty($_POST['deleteComment'])){
 			$this->commentID = $commentID;
-			$this->userID = Session::get('userID');
+			$this->userID = Session::get('email');
 		}
 	}
 
@@ -490,15 +494,88 @@ class Survivor extends Controller{
 			$userID = $this->user->getUserIDByEmail($this->email);
 			$userPosts = $this->post->allPostsByUser($userID);
 			$userProfile = $this->user->getProfileByID($userID);
+
+
+
 			if(isset($_POST['hashtag']) && !empty($_POST['hashtag'])){
-			$hashtag = $_POST['hashtag'];
-			$this->hashtag->insert($hashtag);
+				$hashtag = $_POST['hashtag'];
+
+				
+				$hashtagSearchData = $this->hashtag->getHashtags($hashtag);
+
+
+				
+			}else{
+			/*$hashData = $this->hashtag->getHashtags();*/
+			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
+				$hashtagSearchData = null;
+			}
+
+			$hashtagData = $this->hashtag->getFiveRecentHashtags();
+		    for($i = 0; $i < count($userPosts);$i++){
+				$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
+				$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
+
+				array_push($userPosts[$i],$profile,$userName);
+
+				$userPosts[$i]['comments'] = $this->comment->getAllCommentsForPostID($userPosts[$i]['id']);
+
+				if(isset($userPosts[$i]['comments'])){
+					if(count($userPosts[$i]['comments']) > 0){
+						for($c = 0; $c < count($userPosts[$i]['comments']);$c++){
+							$commentProfile = $this->user->getProfilePicByID($userPosts[$i]['comments'][$c]['posted_by']);
+							$commentUserName = $this->user->getUserNameByID($userPosts[$i]['comments'][$c]['posted_by']);
+							array_push($userPosts[$i]['comments'][$c],$commentProfile,$commentUserName);
+						}
+					}
+
+				}
+
+
+
+			}
+			
+			if(isset($email)){
+
+				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile, 'hashtag' =>$hashtag, 'hashtagData' => $hashtagData, 'hashtagSearchData' => $hashtagSearchData]);
+			}
+		}else{
+			$this->view('login/index');
+		}
+
+
+
+	}
+
+
+
+
+	function mention()
+	{
+		
+		if(isset($_SESSION)){
+			$email = Session::get('email');
+			$this->email = $email;
+			$userID = $this->user->getUserIDByEmail($this->email);
+			$userPosts = $this->post->allPostsByUser($userID);
+			$userProfile = $this->user->getProfileByID($userID);
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+			if(isset($_POST['mention']) && !empty($_POST['mention'])){
+
+			$mention = ltrim($_POST['mention'], '@');//=> 'f:o:'
+			$mentionSearchData = $this->mention->getMentions($mention);
+			echo "<pre>";
+			print_r($mentionSearchData);
+			echo "</pre>";
+			}else{
+				$mentionSearchData = null;
 			}
 	
-			/*$hashData = $this->hashtag->getHashtags();*/
+			$hashtagData = $this->hashtag->getFiveRecentHashtags();
 
 			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
-			$hashtagData = $this->hashtag->getFiveRecentHashtags();
 
 		    for($i = 0; $i < count($userPosts);$i++){
 				$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
@@ -513,7 +590,6 @@ class Survivor extends Controller{
 						for($c = 0; $c < count($userPosts[$i]['comments']);$c++){
 							$commentProfile = $this->user->getProfilePicByID($userPosts[$i]['comments'][$c]['posted_by']);
 							$commentUserName = $this->user->getUserNameByID($userPosts[$i]['comments'][$c]['posted_by']);
-					
 							array_push($userPosts[$i]['comments'][$c],$commentProfile,$commentUserName);
 						}
 					}
@@ -526,7 +602,7 @@ class Survivor extends Controller{
 			
 			if(isset($email)){
 
-				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile, 'hashtag' =>$hashtag, 'hashtagData' => $hashtagData]);
+				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile, 'hashtagData' =>$hashtagData, 'mentionSearchData' => $mentionSearchData]);
 			}
 		}else{
 			$this->view('login/index');
@@ -535,6 +611,31 @@ class Survivor extends Controller{
 
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

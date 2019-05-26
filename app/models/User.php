@@ -28,7 +28,7 @@ class User
 
   function getUserByID($id){
 		$this->id = $id;
-   	$result = Database::query('SELECT userName,email,steamID FROM users WHERE id=:id', array(':id'=>$this->id));
+   	$result = Database::query('SELECT userName,email,steamID,profileCover,profileImage,website,bio,country,userType FROM users WHERE id=:id', array(':id'=>$this->id));
     return $result;
   }
 

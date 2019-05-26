@@ -62,17 +62,28 @@ if(isset($data['search']) && !empty($data['search'])){
     <textarea class="post-body" name="postBody" ></textarea>
     <div class="hash-box">
       <ul>
-      <?php if(isset($data['hashtag']) && !empty($data['hashtag'])){ 
 
-            echo "<li><span class='getValue'>". $data['hashtag']. "</li>";
-          
-     }?>
-       <?php
-       if(isset($data['mentions']) && !empty($data['mentions'])){ 
-       echo"<li data-user='". $userStuff['id']."' data-post=''><a href='".URL ."/public/survivor/user/". $userStuff['id'] ."' a>". $userStuff['userName']."</a></li>";
-       }
-?>
+      <?php 
+        if(isset($data['hashtagSearchData']) && !empty($data['hashtagSearchData'])){
+          foreach($data['hashtagSearchData'] as $hash){ 
+            echo "<li><span class='getValue'>". $hash['hashtag']. "</li>";
+          }
+        }
+      ?>
+
+      <?php 
+        if(isset($data['mentionSearchData']) && !empty($data['mentionSearchData'])){
+          foreach($data['mentionSearchData'] as $mention){ 
+            echo "<li><span class='getValue'>". $mention['userName']. "</li>";
+          }
+        }
+      ?>
+
       </ul>
+
+
+
+
     </div>
     <ul>
       <!-- GOT TO GET THIS WORKING -->
