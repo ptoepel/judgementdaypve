@@ -51,14 +51,6 @@ Class Hashtag{
     }
 
 
-    public function addTrend($hashtag){
-        preg_match_all("/#+([a-zA-Z0-9_]+)/i",$hashtag,$matches);
-        if($matches){
-            $result = array_values($matches[1]);
-        }
-        $result =  Database::query('INSERT INTO hashtags (hashtag,createdDate) VALUES (:hashtag,:createdOn)', array(':hashtag'=> $this->hashtag,':createdOn'=>$this->createdOn));
-
-    }
 
 
 

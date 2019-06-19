@@ -118,42 +118,55 @@ class Survivor extends Controller{
 			$check_empty = preg_replace('/\s+/','',$body);
 
 			if($check_empty !=""){
-				$body_array = preg_split('/\s+/',$body);
-				$body = implode(" ",$body_array);
-				$dateAdded = date("Y-m-d H:i:s");
-				$addedByID = $this->user->getUserIDByEmail($this->email);
-				$userToID = null;
 
-				if($userToID == $addedByID){
+				preg_match_all("/#+(a-zA-Z0-9_)/i",$check_empty,$hashtag);
+				preg_match_all("/@+(a-zA-Z0-9_)/i",$check_empty,$mention);
+
+					if(!empty($hashtag)){
+						$this->hashtag->addTrend($hashtag);
+					}
+
+					if(!empty($mention)){
+						$this->mention->addMention($mention);
+					}
+					$body_array = preg_split('/\s+/',$body);
+					$body = implode(" ",$body_array);
+					$dateAdded = date("Y-m-d H:i:s");
+					$addedByID = $this->user->getUserIDByEmail($this->email);
+					$userToID = null;
+
+					if($userToID == $addedByID){
+						$userToID = 0;
+					}
+
 					$userToID = 0;
+					$userClosed = date("Y-m-d H:i:s");
+					$deleted = "yes";
+					$likes = "0";
+					$image = "";
+					$dislikes = "0";
+
+					$this->post->insert($body,$addedByID,$userToID,$dateAdded,$userClosed,$deleted,$likes,$image,$dislikes);
+					$flashMessage['successBlock'] = "Post Successful";
+					$userPosts = $this->post->allPostsByUser($addedByID);
+					for($i = 0; $i < count($userPosts);$i++){
+						$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
+						$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
+		
+						array_push($userPosts[$i],$profile,$userName);
+		
+					
+		
+
+							$this->view('survivor/index', ['flashErr' => $flashMessage['successBlock'],'data' => $userPosts, 'messages'=> $postBody]);
 				}
-
-				$userToID = 0;
-				$userClosed = date("Y-m-d H:i:s");
-				$deleted = "yes";
-				$likes = "0";
-				$image = "";
-				$dislikes = "0";
-
-				$this->post->insert($body,$addedByID,$userToID,$dateAdded,$userClosed,$deleted,$likes,$image,$dislikes);
-				$flashMessage['successBlock'] = "Post Successful";
-				$userPosts = $this->post->allPostsByUser($addedByID);
-				for($i = 0; $i < count($userPosts);$i++){
-					$profile = $this->user->getProfilePicByID($userPosts[$i]['added_by']);
-					$userName = $this->user->getUserNameByID($userPosts[$i]['added_by']);
-	
-					array_push($userPosts[$i],$profile,$userName);
-	
-				}
-	
-
-						$this->view('survivor/index', ['flashErr' => $flashMessage['successBlock'],'data' => $userPosts, 'messages'=> $postBody]);
-			}
+			
 		}else{
 			$flashMessage['error'] = "You cannot post a blank field";
 			$this->view('survivor/index', ['flashErr' => $flashMessage['error']]);
 		}
 	}
+}
 
 
 	public function comment(){
@@ -559,16 +572,11 @@ class Survivor extends Controller{
 			$userID = $this->user->getUserIDByEmail($this->email);
 			$userPosts = $this->post->allPostsByUser($userID);
 			$userProfile = $this->user->getProfileByID($userID);
-			echo "<pre>";
-			print_r($_POST);
-			echo "</pre>";
+
 			if(isset($_POST['mention']) && !empty($_POST['mention'])){
 
 			$mention = ltrim($_POST['mention'], '@');//=> 'f:o:'
 			$mentionSearchData = $this->mention->getMentions($mention);
-			echo "<pre>";
-			print_r($mentionSearchData);
-			echo "</pre>";
 			}else{
 				$mentionSearchData = null;
 			}
