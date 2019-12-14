@@ -6,7 +6,7 @@ Class Parse
 	private $table;
 	
 	//$cells = getFile();
-	if($this->cells != null ){
+	if( $this->cells !== NULL ){
 		$table = "<table id='myTable'>";
 		$table .="<tr>";
 		foreach($cells as $key => $row){		

@@ -156,7 +156,12 @@ if(isset($data['search']) && !empty($data['search'])){
         echo "<div class='delete-post-container'>";
         echo  "<a href='#' class='delete-post'>X</a>";
         echo "</div>";
-
+        echo "<div class='like-post-container'>";
+        echo  "<a href='#' class='like-post' data-post='". postID ." data-user='".$userID."'>+1</a>";
+        echo "</div>";
+        echo "<div class='like-counter'>";
+        echo "<span class='likesCount'>Like Count: ". $counter ." </span>";
+        echo "</div>";
         echo "<a class='reply' href='". URL ."/public/survivor/comment/".$post['id']."'>Reply</a>";
         echo "</div>";
         if(array_key_exists("comments",$post)){

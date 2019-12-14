@@ -9,12 +9,18 @@ body {
   font-family: 'Heebo', sans-serif;
   line-height: 1.5; }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0;
   font-weight: 400; }
-  h1.lg-heading, h2.lg-heading, h3.lg-heading {
+  h1.lg-heading,
+  h2.lg-heading,
+  h3.lg-heading {
     font-size: 6rem; }
-  h1.sm-heading, h2.sm-heading, h3.sm-heading {
+  h1.sm-heading,
+  h2.sm-heading,
+  h3.sm-heading {
     margin-bottom: 2rem;
     padding: 0.2rem 1rem;
     background: rgba(75, 72, 41, 0.5); }
@@ -31,11 +37,21 @@ header {
 .text-secondary {
   color: #FFCB46; }
 
+.story-content {
+  padding: 3rem 0; }
+  .story-content h3 {
+    font-size: 3rem;
+    background: rgba(0, 0, 0, 0.7);
+    font-weight: 900;
+    color: orange; }
+  .story-content p {
+    line-height: 23px;
+    word-spacing: 5px; }
+
 main {
   padding-top: 4rem;
   min-height: calc(100vh - 60px); }
-  main position:relative
-.icons {
+  main position:relative .icons {
     margin-top: 1rem; }
   main a {
     padding: 0.4rem; }
@@ -185,7 +201,7 @@ form {
 .about-info {
   display: grid;
   grid-gap: 30px;
-  grid-template-areas: 'bioimage bio bio' 'job1 job2 job3';
+  grid-template-areas: 'bioimage bio bio' 'job1 job2 job3';
   grid-template-columns: repeat(3, 1fr); }
 
 .bio-image {

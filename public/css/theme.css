@@ -424,7 +424,6 @@ footer {
 .container-text {
   background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
   -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
   margin: 10px auto;
   color: #FFFFFF;
   justify-content: center;
@@ -496,6 +495,10 @@ footer {
   height: 100%;
   width: 135%; }
 
+.login-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); }
+
 #login#login {
   background: url("http://localhost/miscreated-dmg-log-dashboard/public/css/images/squad.jpg");
   background-attachment: fixed;
@@ -513,7 +516,7 @@ footer {
 
 #login form {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem; }
 
 #login form input {

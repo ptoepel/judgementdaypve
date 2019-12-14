@@ -24,36 +24,38 @@
       </ul>
     </div>
 <?php } ?>
-<form class="login-form" action="<?php echo URL; ?>/public/login/userLogin" method="POST">
-        <label>Your Email</label><input class="nav-item" name="email" type="email" />
-        <label>Your Password</label><input class="nav-item" name="password" type="password" />
-        <a href="<?php echo URL.'/public/login/reset'?>">Reset Password</a>
-        <input class="nav-item" type="submit" name="userLogin" />
-</form>
+<div class="login-container">
+
+  <form class="login-form" action="<?php echo URL; ?>/public/login/userLogin" method="POST">
+          <label>Your Email</label><input class="nav-item" name="email" type="email" />
+          <label>Your Password</label><input class="nav-item" name="password" type="password" />
+          <a href="<?php echo URL.'/public/login/reset'?>">Reset Password</a>
+          <input class="nav-item" type="submit" name="userLogin" />
+  </form>
 
 
-<form method="POST" action="<?php echo URL; ?>/public/login/registerUser">
+  <form method="POST" action="<?php echo URL; ?>/public/login/registerUser">
 
-<div class="instructions">Your 64 bit Steam ID can be found with this: </div>
-<label>User Name</label>
-<input placeholder="Username" name="userName" value="<?php if(isset($data['userName'])){ echo $data['userName']; } ?>"/>
+    <div class="instructions">Your 64 bit Steam ID can be found with this: </div>
+    <label>User Name</label>
+    <input placeholder="Username" name="userName" value="<?php if(isset($data['userName'])){ echo $data['userName']; } ?>"/>
 
-<label>Password</label>
-<input placeholder="Password" type="password" name="password" />
+    <label>Password</label>
+    <input placeholder="Password" type="password" name="password" />
 
-<label>Repeat Password</label>
-<input placeholder="Repeat Password" type="password" name="repeatPassword" />
+    <label>Repeat Password</label>
+    <input placeholder="Repeat Password" type="password" name="repeatPassword" />
 
-<label>Email</label>
-<input placeholder="Email" name="email" value="<?php if(isset($data['email'])){ echo $data['email']; } ?>" />
+    <label>Email</label>
+    <input placeholder="Email" name="email" value="<?php if(isset($data['email'])){ echo $data['email']; } ?>" />
 
-<label>Steam ID</label>
-<input placeholder="Steam ID" name="steamID" value="<?php if(isset($data['steamID'])){ echo $data['steamID']; }?>" />
-
-
-<input type="submit" name="registerUser" placeholder="REGISTER" />
-</form>
+    <label>Steam ID</label>
+    <input placeholder="Steam ID" name="steamID" value="<?php if(isset($data['steamID'])){ echo $data['steamID']; }?>" />
 
 
-      </main>
+    <input type="submit" name="registerUser" placeholder="REGISTER" />
+  </form>
+</div>
+
+</main>
 <?php include('../app/views/inc/footer.php'); ?>

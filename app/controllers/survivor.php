@@ -5,6 +5,7 @@ class Survivor extends Controller{
 	private $user;
 	private $post;
 	private $email;
+	private $userID;
 
 	public function __construct(){
 		Session::init();
@@ -15,10 +16,13 @@ class Survivor extends Controller{
 		$this->message = $this->model('Message');
 		$this->hashtag = $this->model('Hashtag');
 		$this->mention = $this->model('Mention');
+		$this->like = $this->model('Like');
+
+		
 
 
 		if(isset($_SESSION)){
-			if(isset($_SESSION['email']) ){
+			if(isset($_SESSION['userID']) ){
 
 			}else{
 				$this->view('login/index');
@@ -35,9 +39,8 @@ class Survivor extends Controller{
 	{ 
 
 		if(isset($_SESSION)){
-			$email = Session::get('email');
-			$this->email = $email;
-			$userID = $this->user->getUserIDByEmail($this->email);
+			$this->userID = Session::get('userID');
+			$userID = $this->userID;
 			$userPosts = $this->post->allPostsByUser($userID);
 			$userProfile = $this->user->getProfileByID($userID);
 			/*$trendingPosts = $this->post->getMostRecentCommentedPost();*/
@@ -78,7 +81,7 @@ class Survivor extends Controller{
 
 			}
 			
-			if(isset($email)){
+			if(isset($userID)){
 
 				$this->view('survivor/index',['data' => $userPosts,'userProfile' => $userProfile,'hashtagData'=> $hashtagData,'hashtagSearchData'=> $hashtagSearchData]);
 			}
@@ -490,6 +493,17 @@ class Survivor extends Controller{
 
 	}
 
+	function like(){
+
+		if(isset($_POST['post']) && !empty($_POST['user'])){
+			$this->postID = $_POST['post'];
+			$this->userID = $_POST['user'];
+		}
+
+	}
+
+
+
 	function delete_comment(){
 
 		if(isset($_POST['deleteComment']) && !empty($_POST['deleteComment'])){
@@ -620,7 +634,12 @@ class Survivor extends Controller{
 
 	}
 
+function getPostLink($postID){
+	$post = preg_replace("/(https?:\/\/}[\w]+.)([\w\.]+)/","<a href='$0' target='_blink'>$0</a>",$post);
+	$post = preg_replace("/#([\w]+)/", "<a href='".URL."hashtag/$1'>$0</a>", $post);
+	$post = preg_replace("/@([\w]+)/", "<a href='".URL."/$1'>$0</a>", $post);
 
+}
 
 
 

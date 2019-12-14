@@ -142,8 +142,7 @@ class Login extends Controller
   		$checkValue = $this->user->userLogin($this->email,$this->password);
 
   		if(isset($checkValue['checkVal']) == true){
-	
-				Session::set('email',$this->email);
+
 				$addedByID =	$this->user->getUserIDByEmail($this->email);
 				Session::set('userID',$addedByID);
 				$userPosts = $this->post->allPostsByUser($addedByID);

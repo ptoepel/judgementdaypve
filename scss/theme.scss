@@ -548,7 +548,6 @@ footer{
   .container-text {
     background-image:  url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
     -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
     margin: 10px auto;
     color:  #FFFFFF;
     justify-content: center;
@@ -638,6 +637,13 @@ footer{
 
 
 }
+
+
+.login-container{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
 #login{
    
     @include login-background;
@@ -645,7 +651,7 @@ footer{
     form{
 
         display: grid;
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(2,1fr);
         grid-gap: 1rem;
     }
 
@@ -691,11 +697,7 @@ footer{
 
 }
 
-#blog{
 
-
-
-}
 
 
 #survivor-home{
